@@ -25,12 +25,44 @@
 
                     <div class="mb-3">
                         <label for="material-type" class="form-label">Tipo de Material</label>
-                        <input class="form-control" type="text" name="material-type" id="material-type" placeholder="Insira o tipo de material">
+                        <select name="material-type" id="material-type" class="form-select" required>
+                            <option value="">Selecione um tipo</option>
+                            <!-- opções populadas dinamicamente -->
+                        </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="material" class="form-label">Material Recebido</label>
+                        <select name="material" id="material" class="form-select" required>
+                            <option value="">Selecione um material</option>
+                            <!-- opções populadas dinamicamente -->
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="receipt-date" class="form-label">Data de Recebimento</label>
+                        <input type="date" name="receipt-date" id="receipt-date" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="due-date" class="form-label">Data de Validade (se houver)</label>
+                        <input type="date" name="due-date" id="due-date" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="supplier" class="form-label">Fornecedor</label>
+                        <input type="text" name="supplier" id="supplier" class="form-control" placeholder="Insira o forncedor">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantidade</label>
+                        <input type="number" min="0" step="1" name="quantity" id="quantity" class="form-control" placeholder="Insira a quantidade">
+                    </div>
+
 
                     <div class="mb-4">
                         <label for="description" class="form-label">Descrição</label>
-                        <textarea name="description" id="description" class="form-control" rows="3" placeholder="Descreva o tipo de material"></textarea>
+                        <textarea name="description" id="description" class="form-control" rows="3" placeholder="Descreva o material"></textarea>
                     </div>
                 </fieldset>
 
