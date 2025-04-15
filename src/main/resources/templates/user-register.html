@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Materiais</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+<!-- Navbar centralizada -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center mb-5">
+    <a class="navbar-brand" href="#"><i class="bi bi-life-preserver"></i> Cadastro de Usuário</a>
+</nav>
+
+<div class="container">
+    <!-- Card para destacar o formulário -->
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-body">
+            <form method="get">
+                <fieldset class="border rounded p-4 mb-4">
+                    <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
+
+                    <div class="mb-3">
+                        <label for="permission" class="form-label">Perfil de Usuário</label>
+                        <select name="permission" id="permission" class="form-select">
+                            <option value="" disabled selected>Selecione um perfil</option>
+                            <option value="admin">Administrador</option>
+                            <option value="gvc">Guarda-Vidas Civil</option>
+                            <option value="bm">Bombeiro Militar</option>
+                            <!-- opções populadas dinamicamente -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="user-name" class="form-label">Nome</label>
+                        <input type="text" name="user-name" id="user-name" class="form-control" placeholder="Digite o nome do usuário" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="user-id" class="form-label">Matrícula/CPF</label>
+                        <input type="text" name="user-id" id="user-id" class="form-control" placeholder="Digite a matrícula (BM) ou CPF (GVC)" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="user-obm" class="form-label">OBM/Praia</label>
+                        <select type="text" name="user-obm" id="user-obm" class="form-control" required>
+                            <option value="" disabled selected>Selecione a OBM/Praia</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="user-phone" class="form-label">Telefone (48) 9 1234-5678</label>
+                        <input type="text" name="user-phone" id="user-phone" class="form-control" placeholder="Digite o número de telefone do usuário" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="user-grad" class="form-label">Graduação/Posto</label>
+                        <select type="text" name="user-grad" id="user-grad" class="form-control" required>
+                            <option value="" disabled selected>Selecione a graduação/posto</option>
+                        </select>
+                    </div>
+
+                </fieldset>
+
+                <!-- Botões alinhados à direita -->
+                <div class="d-flex justify-content-end">
+                    <button type="reset" class="btn btn-secondary me-2">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (opcional para componentes interativos) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-cVKIPhGhrtS6fmIDbT+ogVf5bJpG5NR0sA5z/pJNAX1zjEGzFftJKyVZ6jIW3" crossorigin="anonymous"></script>
+</body>
+</html>
