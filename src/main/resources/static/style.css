@@ -1,0 +1,75 @@
+/*!* Destacar o legend dentro do fieldset *!*/
+/*fieldset {*/
+/*    background-color: #f8f9fa; !* cinza claro *!*/
+/*}*/
+
+/*legend {*/
+/*    font-size: 1.25rem;*/
+/*    font-weight: 500;*/
+/*    color: #495057;*/
+/*}*/
+
+/*!* Caso queira borda arredondada e sombra leve no card *!*/
+/*.card {*/
+/*    border-radius: 0.75rem;*/
+/*    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);*/
+/*}*/
+/* Paleta CBMSC forçando estilos Bootstrap */
+.btn-primary {
+    background-color: #D20124 !important; /* vermelho escarlate */
+    border-color: #D20124 !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background-color: #a6001b !important;
+    border-color: #a6001b !important;
+}
+
+.btn-secondary {
+    background-color: #A9ABAE !important; /* cinza institucional */
+    border-color: #A9ABAE !important;
+    color: #000 !important;
+}
+
+.btn-secondary:hover {
+    background-color: #8c8e91 !important;
+    border-color: #8c8e91 !important;
+}
+
+body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+fieldset {
+    background-color: #f8f9fa; /* cinza claro */
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+legend {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #D20124; /* destaque em vermelho CBMSC */
+    text-align: center;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+input, select {
+    margin-bottom: 1rem;
+}
+
+.navbar {
+    background-color: #D20124 !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+}
