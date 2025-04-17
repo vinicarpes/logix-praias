@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8">
+  <title th:text="${title}"></title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<!-- Navbar centralizada -->
+<nav th:fragment="navbar(title)" class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+  <div class="container position-relative">
+    <button
+            class="btn position-absolute start-0"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#sidebarMenu"
+            aria-controls="sidebarMenu"
+    >
+      <i class="bi bi-list text-light fs-3"></i>
+    </button>
+
+
+    <!-- Título centralizado -->
+    <span class="navbar-brand mx-auto">
+            <i class="bi bi-life-preserver"></i> <span th:text="*{title}"></span>
+        </span>
+
+    <!-- Ícone de notificação -->
+    <a href="#" class="nav-link position-absolute end-0">
+      <i class="bi bi-bell text-light fs-5 fs-3"></i>
+    </a>
+  </div>
+</nav>
