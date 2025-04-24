@@ -63,13 +63,18 @@ input, select {
     margin-bottom: 1rem;
 }
 
-.navbar {
-    background-color: #D20124 !important;
-    color: #fff !important;
-    font-weight: bold;
-}
 
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link {
     color: #fff !important;
 }
+.navbar {
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* sombra suave para profundidade */
+    transition: background-color 0.2s ease;
+    background-color: #D20124 !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+.navbar:hover {
+    background-color: rgba(210, 1, 36, 0.9);      /* leve escurecimento no hover */ }
+
