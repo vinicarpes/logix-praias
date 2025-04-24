@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Consulta de Estoque</title>
@@ -38,22 +38,116 @@
 
 <main>
     <div class="mt-4 container">
-        <div class="row ">
-            <div class="col-12 border">
-                <b>Material:</b> <span th:text=""></span><br>
-                <b>Quantidade:</b> <span th:text=""></span><br>
-                <b>Descrição:</b> <span th:text=""></span><br>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="#" class="btn btn-primary">Adicionar</a>
-                <a href="#" class="btn btn-primary">Retirar</a>
-                <a href="#" class="btn btn-secondary">Voltar</a>
+        <div class="card mx-auto" >
+            <div class="card-body">
+
+                <form method="get">
+                    <fieldset class="border rounded p-4 mb-4">
+                        <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
+
+                        <div class="mb-3">
+                            <label for="material-type" class="form-label">Tipo de Material</label>
+                            <select class="form-select" type="text" name="material" id="material-type">
+                                <option selected disabled value="">Selecione o tipo de material</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="material" class="form-label">Material</label>
+                            <select class="form-select" type="text" name="material" id="material">
+                                <option selected disabled value="">Selecione o material</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantidade </label>
+                                <input type="radio" name="quantity-param" id="lower-than"> Menor
+                                <input type="radio" name="quantity-param" id="higher-than"> Maior
+                                <input type="radio" name="quantity-param" id="equal"> Exata
+                            <input type="number" class="form-control" placeholder="Quantidade" name="quantity" id="quantity">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="responsible" class="form-label">Responsável</label>
+                            <select class="form-select" type="text" name="responsible" id="responsible">
+                                <option selected disabled value="">Selecione o responsável</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="receipt-date" class="form-label">Data de entrada no estoque</label>
+                            <input class="form-control" type="date" name="receipt-date" id="receipt-date">
+                        </div>
+                    </fieldset>
+                    <!-- Botões alinhados à direita -->
+                    <div class="d-flex justify-content-end">
+                        <button type="reset" class="btn btn-secondary me-2">
+                            <i class="bi bi-x-circle"></i> Limpar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </div>
+                </form>
+                <hr>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col-1">ID</th>
+                        <th scope="col-3">Tipo de Material</th>
+                        <th scope="col-4">Material</th>
+                        <th scope="col-1">Quantidade</th>
+                        <th scope="col">Consultar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="storage : ${storages}">
+                        <td class="col-1 border"  th:text="${storage.getId()}">ID</td>
+                        <td class="col-3 border"  th:text="${storage.getId()}">Tipo de Material</td>
+                        <td class="col-4 border" th:text="${storage.getId()}">Material</td>
+                        <td class="col-1 border"  th:text="${storage.getId()}">Quantidade</td>
+                        <td class="col-1 border" th:text="${storage.getId()}"><a>Registros</a></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </main>
+
+<!-- Offcanvas Menu -->
+<div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="sidebarMenu"
+        aria-labelledby="sidebarMenuLabel"
+>
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Fechar"
+        ></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-unstyled">
+            <li><a href="#" class="nav-link"><i class="bi bi-house"></i> Início</a></li>
+            <li><a href="#" class="nav-link"><i class="bi bi-clipboard-plus"></i> Novo Cadastro</a></li>
+            <li><a href="#" class="nav-link"><i class="bi bi-card-list"></i> Meus Alertas</a></li>
+            <li><a href="#" class="nav-link"><i class="bi bi-gear"></i> Configurações</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
 
 </body>
 </html>
