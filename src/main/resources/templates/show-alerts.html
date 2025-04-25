@@ -88,21 +88,21 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col-2">Matrícula/CPF</th>
-                        <th scope="col-4">Nome</th>
-                        <th scope="col-2">Graduação/Posto</th>
-                        <th scope="col-2">Praia</th>
-                        <th scope="col-2">Perfil</th>
+                        <th scope="col-2">Tipo de Alerta</th>
+                        <th scope="col-4">Material</th>
+                        <th scope="col-2">Referência do Alerta</th>
+                        <th scope="col-2">Usuário Responsável</th>
+                        <th scope="col-2">Detalhes</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="storage : ${storages}">
-                        <td class="col-2 border"  th:text="${storage.getId()}">727056-9</td>
-                        <td class="col-4 border"  th:text="${storage.getId()}">Vinicius Carpes de Freitas</td>
-                        <td class="col-2 border" th:text="${storage.getId()}">Estudante</td>
-                        <td class="col-2 border"  th:text="${storage.getId()}">Ribeirão da Ilha</td>
-                        <td class="col-2 border" th:text="${storage.getId()}"><a>Desenvolvedor</a></td>
+                        <td class="col-2 border"  th:text="${storage.getId()}">Quantidade</td>
+                        <td class="col-4 border"  th:text="${storage.getId()}">Camiseta Manga Longa G GVC</td>
+                        <td class="col-2 border" th:text="${storage.getId()}">20</td>
+                        <td class="col-2 border"  th:text="${storage.getId()}">Carlos Emílio <Bocchinia></Bocchinia></td>
+                        <td class="col-2 border" th:text="${storage.getId()}"><a href="">Visualizar</a></td>
                     </tr>
                     </tbody>
                 </table>
