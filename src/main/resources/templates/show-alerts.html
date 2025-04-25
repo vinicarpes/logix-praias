@@ -6,35 +6,12 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
 <!-- Navbar centralizada -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-    <div class="container position-relative">
-        <button
-                class="btn position-absolute start-0"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#sidebarMenu"
-                aria-controls="sidebarMenu"
-        >
-            <i class="bi bi-list text-light fs-3"></i>
-        </button>
-
-
-        <!-- Título centralizado -->
-        <span class="navbar-brand mx-auto">
-            <i class="bi bi-life-preserver"></i> Consulta de Usuário
-        </span>
-
-        <!-- Ícone de notificação -->
-        <a href="#" class="nav-link position-absolute end-0">
-            <i class="bi bi-bell text-light fs-5 fs-3"></i>
-        </a>
-    </div>
-</nav>
+<div th:replace="~{fragments :: navbar(' Registro de Alertas')}"></div>
 
 <main>
     <div class="mt-4 container">
@@ -112,30 +89,7 @@
 </main>
 
 <!-- Offcanvas Menu -->
-<div
-        class="offcanvas offcanvas-start"
-        tabindex="-1"
-        id="sidebarMenu"
-        aria-labelledby="sidebarMenuLabel"
->
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
-        <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Fechar"
-        ></button>
-    </div>
-    <div class="offcanvas-body">
-        <ul class="list-unstyled">
-            <li><a href="#" class="nav-link"><i class="bi bi-house"></i> Início</a></li>
-            <li><a href="#" class="nav-link"><i class="bi bi-clipboard-plus"></i> Novo Cadastro</a></li>
-            <li><a href="#" class="nav-link"><i class="bi bi-card-list"></i> Meus Alertas</a></li>
-            <li><a href="#" class="nav-link"><i class="bi bi-gear"></i> Configurações</a></li>
-        </ul>
-    </div>
-</div>
+<div th:replace="~{fragments :: menu}"></div>
 
 
 <script
@@ -144,6 +98,6 @@
         crossorigin="anonymous"
 ></script>
 
-    <script src="../static/js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

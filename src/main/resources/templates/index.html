@@ -1,78 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logix Praias</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='../static/css/index-style.css'>
-    <link rel='stylesheet' type='text/css' media='screen'
-          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: indexHead('Logix Praias')}"></head>
 <body>
-<!-- Navbar centralizada -->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">-->
-<!--    <div class="container position-relative">-->
-<!--        <button-->
-<!--                class="btn position-absolute start-0"-->
-<!--                type="button"-->
-<!--                data-bs-toggle="offcanvas"-->
-<!--                data-bs-target="#sidebarMenu"-->
-<!--                aria-controls="sidebarMenu"-->
-<!--        >-->
-<!--            <i class="bi bi-list text-light fs-3"></i>-->
-<!--        </button>-->
 
-
-<!--        &lt;!&ndash; Título centralizado &ndash;&gt;-->
-<!--        <span class="navbar-brand mx-auto">-->
-<!--            <i class="bi bi-life-preserver"></i> Logix Praias-->
-<!--        </span>-->
-
-<!--        &lt;!&ndash; Ícone de notificação &ndash;&gt;-->
-<!--        <a href="#" class="nav-link position-absolute end-0">-->
-<!--            <i class="bi bi-bell text-light fs-5 fs-3"></i>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</nav>-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-    <div class="container">
-        <!-- Botão offcanvas à esquerda -->
-        <button
-                class="btn text-light me-3"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#sidebarMenu"
-                aria-controls="sidebarMenu"
-                aria-label="Abrir menu"
-        >
-            <i class="bi bi-list fs-3"></i>
-        </button>
-
-        <!-- Marca centralizada -->
-        <a class="navbar-brand mx-auto text-light fs-4" href="#">
-            <i class="bi bi-life-preserver me-2"></i>
-            Logix Praias
-        </a>
-
-        <!-- Ícone de sino à direita -->
-        <a
-                href="#"
-                class="nav-link text-light position-relative ms-3"
-                aria-label="Notificações"
-        >
-            <i class="bi bi-bell-fill fs-3"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        3
-      </span>
-        </a>
-    </div>
-</nav>
+<div th:replace="~{fragments :: navbar(' Logix Praias')}"></div>
 
 <section class="card-panel">
     <!-- 1. Cadastro de Usuário -->
@@ -162,30 +93,7 @@
     </div>
 </footer>
 <!-- Offcanvas Menu -->
-<div
-        class="offcanvas offcanvas-start"
-        tabindex="-1"
-        id="sidebarMenu"
-        aria-labelledby="sidebarMenuLabel"
->
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
-        <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Fechar"
-        ></button>
-    </div>
-    <div class="offcanvas-body">
-        <ul class="list-unstyled">
-            <li><a href="#" class="nav-link"><i class="bi bi-house"></i> Início</a></li>
-            <li><a href="#" class="nav-link"><i class="bi bi-clipboard-plus"></i> Novo Cadastro</a></li>
-            <li><a href="#" class="nav-link"><i class="bi bi-card-list"></i> Meus Alertas</a></li>
-            <li><a href="#" class="nav-link"><i class="bi bi-gear"></i> Configurações</a></li>
-        </ul>
-    </div>
-</div>
+<div th:replace="~{fragments :: menu}"></div>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
