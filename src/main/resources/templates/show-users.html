@@ -1,0 +1,167 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta de Estoque</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+<!-- Navbar centralizada -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+    <div class="container position-relative">
+        <button
+                class="btn position-absolute start-0"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#sidebarMenu"
+                aria-controls="sidebarMenu"
+        >
+            <i class="bi bi-list text-light fs-3"></i>
+        </button>
+
+
+        <!-- Título centralizado -->
+        <span class="navbar-brand mx-auto">
+            <i class="bi bi-life-preserver"></i> Consulta de Estoque
+        </span>
+
+        <!-- Ícone de notificação -->
+        <a href="#" class="nav-link position-absolute end-0">
+            <i class="bi bi-bell text-light fs-5 fs-3"></i>
+        </a>
+    </div>
+</nav>
+
+<main>
+    <div class="mt-4 container">
+        <div class="card mx-auto" >
+            <div class="card-body">
+
+                <form method="get">
+                    <fieldset class="border rounded p-4 mb-4">
+                        <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
+
+                        <div class="mb-3">
+                            <label for="user-registration" class="form-label">Matrícula/CPF</label>
+                            <input type="text" id="user-registration" name="user-registration" class="form-control" placeholder="123456-7 ou 123.456.789-10">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="user-name" class="form-label">Nome</label>
+                            <input type="text" id="user-name" name="user-name" class="form-control" placeholder="Nome...">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="user-grad" class="form-label">Graduação/Posto</label>
+                            <select class="form-select" type="text" name="user-grad" id="user-grad">
+                                <option value="" disabled selected>Selecione a graduação/posto</option>
+                                <option value="GVC">Guarda-Vidas Civil</option>
+                                <option value="SD">Soldado</option>
+                                <option value="CB">Cabo</option>
+                                <option value="3°SGT">Terceiro-Sargento</option>
+                                <option value="2°SGT">Segundo-Sargento</option>
+                                <option value="1°SGT">Primeiro-Sargento</option>
+                                <option value="ST">Subtenente</option>
+                                <option value="2°TEN">Segundo-Tenente</option>
+                                <option value="1°TEN">Primeiro-Tenente</option>
+                                <option value="CAP">Capitão</option>
+                                <option value="MAJ">Major</option>
+                                <option value="TEN-CEL">Tenente-Coronel</option>
+                                <option value="CEL">Coronel</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="praia" class="form-label">Praia </label>
+                            <select type="text" class="form-control" placeholder="" name="praia" id="praia">
+                                <option value="" disabled selected>Selecione uma praia</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Perfil</label>
+                            <select class="form-select" type="text" name="role" id="role">
+                                <option selected disabled value="">Selecione o perfil</option>
+                                <option value="admin">Administrador</option>
+                                <option value="gvc">Guarda-Vidas Civil</option>
+                                <option value="bm">Bombeiro Militar</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <!-- Botões alinhados à direita -->
+                    <div class="d-flex justify-content-end">
+                        <button type="reset" class="btn btn-secondary me-2">
+                            <i class="bi bi-x-circle"></i> Limpar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </div>
+                </form>
+                <hr>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col-2">Matrícula/CPF</th>
+                        <th scope="col-4">Nome</th>
+                        <th scope="col-2">Graduação/Posto</th>
+                        <th scope="col-2">Praia</th>
+                        <th scope="col-2">Perfil</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="storage : ${storages}">
+                        <td class="col-2 border"  th:text="${storage.getId()}">727056-9</td>
+                        <td class="col-4 border"  th:text="${storage.getId()}">Vinicius Carpes de Freitas</td>
+                        <td class="col-2 border" th:text="${storage.getId()}">Estudante</td>
+                        <td class="col-2 border"  th:text="${storage.getId()}">Ribeirão da Ilha</td>
+                        <td class="col-2 border" th:text="${storage.getId()}"><a>Desenvolvedor</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Offcanvas Menu -->
+<div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="sidebarMenu"
+        aria-labelledby="sidebarMenuLabel"
+>
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Fechar"
+        ></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-unstyled">
+            <li><a href="#" class="nav-link"><i class="bi bi-house"></i> Início</a></li>
+            <li><a href="#" class="nav-link"><i class="bi bi-clipboard-plus"></i> Novo Cadastro</a></li>
+            <li><a href="#" class="nav-link"><i class="bi bi-card-list"></i> Meus Alertas</a></li>
+            <li><a href="#" class="nav-link"><i class="bi bi-gear"></i> Configurações</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+
+</body>
+</html>
