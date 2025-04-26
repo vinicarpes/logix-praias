@@ -10,8 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/material/type")
 public class MaterialTypeController {
+
     @PostMapping("/register")
-    public ModelAndView register(){
+    public ModelAndView create(){
         ModelAndView mv = new ModelAndView("material-type-register");
         return mv;
     }
