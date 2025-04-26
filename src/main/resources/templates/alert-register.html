@@ -25,8 +25,8 @@
                     <legend class="w-auto px-2 text-center">Preencha os dados do formulário</legend>
 
                     <div class="mb-3">
-                        <label for="material-type" class="form-label">Tipo de Alerta</label>
-                        <select name="material-type" id="material-type" class="form-select" required>
+                        <label for="alert-type" class="form-label">Tipo de Alerta</label>
+                        <select name="alert-type" id="alert-type" class="form-select" required>
                             <option value="" disabled selected>Selecione sua opção</option>
                             <option value="quantity">Quantidade</option>
                             <option value="due">Data de Validade</option>
@@ -44,7 +44,7 @@
             <!--Tentar tranformar o tipo de input de maeneira dinâmica com base na seleção do tipo de alerta-->
                     <div class="mb-3">
                         <label for="alert-ref" class="form-label">Referência do Alerta</label>
-                        <input type="text" name="alert-ref" id="alert-ref" class="form-control" placeholder="Valor de referência" required>
+                        <input type="text" name="alert-ref" id="alert-ref" class="form-control" disabled placeholder="Valor de referência" required>
                     </div>
 
                     <div class="mb-3">
@@ -79,6 +79,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"
 ></script>
+
+    <script src="../js/main.js"></script>
 
 </body>
 </html>
