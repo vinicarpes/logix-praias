@@ -7,11 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/material/receive")
+@RequestMapping("/material/receipt")
 public class MaterialReceiptController {
     @GetMapping("")
     public ModelAndView receive() {
         ModelAndView mv = new ModelAndView("material-receipt");
+        return mv;
+    }
+
+    @GetMapping("/update/{id}")
+    public ModelAndView update(@PathVariable(value = "id") long id) {
+        ModelAndView mv = new ModelAndView("");
         return mv;
     }
 
@@ -20,7 +26,7 @@ public class MaterialReceiptController {
         ModelAndView mv = new ModelAndView("show-storage");
         return mv;
     }
-    
+
     @GetMapping("/show/{id}")
     public ModelAndView show(@PathVariable(value = "id") long id){
         ModelAndView mv = new ModelAndView("");
