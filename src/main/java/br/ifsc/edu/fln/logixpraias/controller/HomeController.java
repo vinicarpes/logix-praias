@@ -13,10 +13,4 @@ public class HomeController {
         return "index";   // Retorna o template “index.html” em /templates
     }
 
-    @GetMapping("/alerts")
-    public String alertShow(Model model) {
-        // qualquer atributo que queira passar
-        return "alert-register";   // Retorna o template “index.html” em /templates
-    }
-
 }
