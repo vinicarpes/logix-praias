@@ -29,7 +29,7 @@ public class AlertController {
 
     @GetMapping("/show")
     public ModelAndView show(){
-        ModelAndView mv = new ModelAndView("alert-show");
+        ModelAndView mv = new ModelAndView("show-alerts");
         return mv;
     }
 
