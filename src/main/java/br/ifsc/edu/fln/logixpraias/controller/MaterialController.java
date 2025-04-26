@@ -11,13 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/material")
 public class MaterialController {
 
-    @PostMapping("/register")
+    @GetMapping("/register")
     public ModelAndView create() {
         ModelAndView mv = new ModelAndView("material-register");
         return mv;
     }
 
-    @PostMapping("/update/{id}")
+    @GetMapping("/update/{id}")
     public void update(@PathVariable(value = "id") long id) {
 
     }
