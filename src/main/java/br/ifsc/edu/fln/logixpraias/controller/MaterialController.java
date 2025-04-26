@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller()
+@Controller
 @RequestMapping("/material")
 public class MaterialController {
 
-    @GetMapping("/register")
-    public ModelAndView register() {
+    @PostMapping("/register")
+    public ModelAndView create() {
         ModelAndView mv = new ModelAndView("material-register");
         return mv;
     }
