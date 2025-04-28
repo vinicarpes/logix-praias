@@ -76,5 +76,5 @@ input, select {
     font-weight: bold;
 }
 .navbar:hover {
-    background-color: rgba(210, 1, 36, 0.9);      /* leve escurecimento no hover */ }
+    background-color: rgba(210, 1, 36, 0.9) !important;    /* leve escurecimento no hover */ }
 
