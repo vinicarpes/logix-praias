@@ -178,3 +178,8 @@ footer {
     gap: 1rem;
     width: 100%;
 }
+
+a, a:hover {
+    color: black;
+    text-decoration: none;
+}

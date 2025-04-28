@@ -6,75 +6,90 @@
 <div th:replace="~{fragments :: navbar(' Logix Praias')}"></div>
 
 <section class="card-panel">
-    <!-- 1. Cadastro de Usuário -->
-    <div class="card">
-        <div class="card-body text-center">
-            <i class="fa fa-user-plus fs-1 mb-3" aria-hidden="true"></i>
-            <h5 class="card-title fs-5">Cadastro de Usuário</h5>
-            <p class="card-text fs-6">Cadastre novos usuários no sistema</p>
-        </div>
-    </div>
 
-    <!-- 2. Cadastro de Tipo de Material -->
     <div class="card">
         <div class="card-body text-center">
+            <a href="/material/type/register">
             <i class="fa fa-tags fs-1 mb-3" aria-hidden="true"></i>
-            <h5 class="card-title fs-5">Cadastro de Tipo de Material</h5>
+            <h5 class="card-title fs-5">Cadastro de Categoria</h5>
             <p class="card-text fs-6">Defina categorias para materiais</p>
+            </a>
         </div>
     </div>
 
     <!-- 3. Cadastro de Material -->
     <div class="card">
         <div class="card-body text-center">
+            <a href="/material/register">
             <i class="fa fa-cubes fs-1 mb-3" aria-hidden="true"></i>
             <h5 class="card-title fs-5">Cadastro de Material</h5>
             <p class="card-text fs-6">Gerencie os materiais existentes</p>
+            </a>
         </div>
     </div>
 
     <!-- 4. Cadastro de Recebimento de Material -->
     <div class="card">
         <div class="card-body text-center">
+            <a href="/material/receipt">
             <i class="fa fa-download fs-1 mb-3" aria-hidden="true"></i>
-            <h5 class="card-title fs-5">Cadastro de Recebimento</h5>
+            <h5 class="card-title fs-5">Recebimento de Material</h5>
             <p class="card-text fs-6">Registre entradas de materiais</p>
+            </a>
         </div>
     </div>
 
     <!-- 5. Cadastro de Retirada de Material -->
     <div class="card">
         <div class="card-body text-center">
+            <a href="/material/withdrawal">
             <i class="fa fa-upload fs-1 mb-3" aria-hidden="true"></i>
-            <h5 class="card-title fs-5">Cadastro de Retirada</h5>
+            <h5 class="card-title fs-5">Retirada de Material</h5>
             <p class="card-text fs-6">Registre saídas de materiais</p>
+            </a>
         </div>
     </div>
 
     <!-- 6. Consulta de Estoque -->
     <div class="card">
         <div class="card-body text-center">
+            <a href="/material/show">
             <i class="fa fa-search fs-1 mb-3" aria-hidden="true"></i>
             <h5 class="card-title fs-5">Consulta de Estoque</h5>
             <p class="card-text fs-6">Verifique níveis de estoque</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body text-center">
+            <a href="/user/register">
+                <i class="fa fa-user-plus fs-1 mb-3" aria-hidden="true"></i>
+                <h5 class="card-title fs-5">Cadastro de Usuário</h5>
+                <p class="card-text fs-6">Cadastre novos usuários no sistema</p>
+            </a>
         </div>
     </div>
 
     <!-- 7. Consulta de Usuário -->
     <div class="card">
         <div class="card-body text-center">
+            <a href="/user">
             <i class="fa fa-users fs-1 mb-3" aria-hidden="true"></i>
             <h5 class="card-title fs-5">Consulta de Usuário</h5>
             <p class="card-text fs-6">Busque usuários cadastrados</p>
+            </a>
         </div>
     </div>
 
     <!-- 8. Relatórios -->
     <div class="card">
         <div class="card-body text-center">
+            <a href="/reports">
             <i class="fa fa-file-text fs-1 mb-3" aria-hidden="true"></i>
             <h5 class="card-title fs-5">Relatórios</h5>
             <p class="card-text fs-6">Gere relatórios detalhados</p>
+            </a>
         </div>
     </div>
 </section>
