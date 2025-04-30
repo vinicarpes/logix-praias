@@ -192,3 +192,8 @@ a.option{
 li:hover{
     border-bottom: 2px solid var(--cbmsc-primary);
 }
+
+a.option:hover {
+    transform: translateY(-0.25rem) ;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
