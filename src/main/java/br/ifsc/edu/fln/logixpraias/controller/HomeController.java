@@ -13,4 +13,8 @@ public class HomeController {
         return "index";   // Retorna o template “index.html” em /templates
     }
 
+    @GetMapping("/about")
+    public String about(Model model) {
+        return "about";
+    }
 }

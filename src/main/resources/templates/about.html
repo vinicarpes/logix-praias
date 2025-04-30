@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: indexHead('Logix Praias')}"></head>
+<body>
+
+<div th:replace="~{fragments :: navbar(' Logix Praias')}"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2> <i class="fa fa-info-circle"></i> Informações adicionais</h2>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis deserunt eaque
+                earum eligendi, enim, inventore maiores perspiciatis, praesentium provident quidem
+                quod vitae! Quaerat ratione unde velit.
+                Asperiores laborum praesentium rerum!</p>
+
+            <ul>
+                <li> Tralalero Tralala</li>
+                <li> Bombardiro Crocodilo</li>
+                <li> Brr Brr Patapim</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="option">
+        <a href="/" class="option">
+            <i class="fa-home fa-solid"></i>
+            Início
+        </a>
+    </div>
+    <div class="option">
+        <a href="/about" class="option">
+            <i class="fa fa-info-circle"></i>
+            Sobre
+        </a>
+    </div>
+
+    <div class="option">
+        <a href="/{username}" class="option">
+            <i class="fa fa-user"></i>
+            Minha Conta
+        </a>
+    </div>
+</footer>
+<!-- Offcanvas Menu -->
+<div th:replace="~{fragments :: menu}"></div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>
