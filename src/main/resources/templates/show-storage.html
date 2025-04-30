@@ -23,7 +23,7 @@
                         <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
 
                         <div class="mb-3">
-                            <label for="material-type" class="form-label">Tipo de Material</label>
+                            <label for="material-type" class="form-label">Categoria de Material</label>
                             <select class="form-select" type="text" name="material" id="material-type">
                                 <option selected disabled value="">Selecione o tipo de material</option>
                             </select>
@@ -42,18 +42,6 @@
                                 <input type="radio" name="quantity-param" id="higher-than"> Maior
                                 <input type="radio" name="quantity-param" id="equal"> Exata
                             <input type="number" class="form-control" placeholder="Quantidade" name="quantity" id="quantity">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="responsible" class="form-label">Responsável</label>
-                            <select class="form-select" type="text" name="responsible" id="responsible">
-                                <option selected disabled value="">Selecione o responsável</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="receipt-date" class="form-label">Data de entrada no estoque</label>
-                            <input class="form-control" type="date" name="receipt-date" id="receipt-date">
                         </div>
                     </fieldset>
                     <!-- Botões alinhados à direita -->
@@ -75,16 +63,16 @@
                         <th scope="col-3">Tipo de Material</th>
                         <th scope="col-4">Material</th>
                         <th scope="col-1">Quantidade</th>
-                        <th scope="col">Consultar</th>
+                        <th scope="col">Detalhes</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="storage : ${storages}">
-                        <td class="col-1 border"  th:text="${storage.getId()}">ID</td>
-                        <td class="col-3 border"  th:text="${storage.getId()}">Tipo de Material</td>
-                        <td class="col-4 border" th:text="${storage.getId()}">Material</td>
-                        <td class="col-1 border"  th:text="${storage.getId()}">Quantidade</td>
-                        <td class="col-1 border" th:text="${storage.getId()}"><a>Registros</a></td>
+                    <tr>
+                        <td class="col-1 border" >ID</td>
+                        <td class="col-3 border"  >Categoria de Material</td>
+                        <td class="col-4 border" >Material</td>
+                        <td class="col-1 border"  >Quantidade</td>
+                        <td class="col-1 border" ><a>Registros</a></td>
                     </tr>
                     </tbody>
                 </table>
