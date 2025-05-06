@@ -23,7 +23,7 @@
 
                     <div class="mb-3">
                         <label for="permission" class="form-label">Perfil de Usuário</label>
-                        <select name="permission" id="permission" class="form-select">
+                        <select name="permission" id="permission" class="form-select" required>
                             <option value="" disabled selected>Selecione um perfil</option>
                             <option value="admin">Administrador</option>
                             <option value="gvc">Guarda-Vidas Civil</option>
@@ -39,18 +39,6 @@
                     <div class="mb-3">
                         <label for="user-id" class="form-label">Matrícula/CPF</label>
                         <input type="text" name="user-id" id="user-id" class="form-control" placeholder="Digite a matrícula (BM) ou CPF (GVC)" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="user-beach" class="form-label">Praia</label>
-                        <select type="text" name="user-obm" id="user-beach" class="form-control" required>
-                            <option value="" disabled selected>Selecione a Praia</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="user-phone" class="form-label">Telefone</label>
-                        <input type="text" name="user-phone" id="user-phone" class="form-control" placeholder="(48)91234-5678" required>
                     </div>
 
                     <div class="mb-3">
@@ -72,6 +60,23 @@
                             <option value="CEL">Coronel</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="user-beach" class="form-label">Praia</label>
+                        <select type="text" name="user-obm" id="user-beach" class="form-control" required>
+                            <option value="" disabled selected>Selecione a Praia</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="user-phone" class="form-label">Telefone</label>
+                        <input type="text" name="user-phone" id="user-phone" class="form-control" placeholder="(48)91234-5678" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="user-email" class="form-label">E-mail</label>
+                        <input type="email" name="user-email" id="user-email" class="form-control" placeholder="exemplo@gmail.com" required>
+                    </div>
+
 
                 </fieldset>
 
