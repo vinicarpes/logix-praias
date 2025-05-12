@@ -11,6 +11,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
+  --cbmsc-primary: #D20124;   /* Vermelho Escarlate */
+  --cbmsc-secondary: #A9ABAE; /* Cinza institucional */
+  --cbmsc-success: #FFF212;   /* Amarelo */
+  --cbmsc-dark: #000000;      /* Preto */
+  --cbmsc-light: #FFFFFF;     /* Branco */
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -97,7 +102,7 @@ body {
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
+  background: var(--cbmsc-light);
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
@@ -2862,11 +2867,11 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #0d6efd;
-  --bs-btn-border-color: #0d6efd;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0b5ed7;
-  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-bg: var(--cbmsc-primary);
+  --bs-btn-border-color: var(--cbmsc-primary);
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: #f83d3d;
+  --bs-btn-hover-border-color:  #7a0909;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #0a58ca;
@@ -8143,7 +8148,7 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+  background: var(--cbmsc-primary) !important;
 }
 
 .bg-secondary {
