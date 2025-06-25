@@ -17,26 +17,26 @@
     <!-- Card para destacar o formulário -->
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <form method="get">
+            <form method="post" th:action="@{/material/register}" th:object="${material}">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
 
                     <div class="mb-3">
                         <label for="material-type" class="form-label">Categoria de Material</label>
-                        <select name="material-type" id="material-type" class="form-select" th:field="*{categorias}">
+                        <select name="material-type" id="material-type" class="form-select" th:field="*{categoria}">
                             <option value="" selected>Selecione um tipo</option>
-                            <option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria}"></option>
+                            <option th:each="categoria : ${categorias}" th:value="${categoria.getId()}" th:text="${categoria}"></option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="material" class="form-label">Material</label>
-                        <input type="text" name="material" id="material" class="form-control" placeholder="Digite o nome do material">
+                        <label for="nome" class="form-label">Material</label>
+                        <input th:field="*{nome}" type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome do material">
                     </div>
 
 
                     <div class="mb-4">
-                        <label for="description" class="form-label">Descrição</label>
-                        <textarea name="description" id="description" class="form-control" rows="3" placeholder="Descreva o material"></textarea>
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea th:field="*{descricao}" name="descricao" id="descricao" class="form-control" rows="3" placeholder="Descreva o material"></textarea>
                     </div>
                 </fieldset>
 

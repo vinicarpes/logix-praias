@@ -1,14 +1,13 @@
 package br.ifsc.edu.fln.logixpraias.controller;
 
 import br.ifsc.edu.fln.logixpraias.model.Categoria;
+import br.ifsc.edu.fln.logixpraias.model.Material;
 import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
+import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -19,13 +18,27 @@ import java.util.List;
 public class MaterialController {
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private MaterialRepository materialRepository;
 
     @GetMapping("/register")
     public ModelAndView create(Model model) {
         List<Categoria> categorias = categoriaRepository.findAll();
         model.addAttribute("categorias", categorias);
+        model.addAttribute("material",  new Material());
         ModelAndView mv = new ModelAndView("material-register");
         return mv;
+    }
+
+    @PostMapping("/register")
+    public ModelAndView register(@ModelAttribute Material material) {
+        try{
+            materialRepository.save(material);
+            return new ModelAndView("redirect:/index");
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ModelAndView("500");
+        }
     }
 
     @GetMapping("/update/{id}")
