@@ -44,14 +44,24 @@ public class MaterialController {
         }
     }
 
-    @GetMapping("/update/{id}")
-    public void update(@PathVariable(value = "id") long id) {
-
+    @PutMapping("/update/{id}")
+    @ResponseBody
+    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody Material material) {
+        if (materialRepository.existsById(id)) {
+            material.setId(id);
+            materialRepository.save(material);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/show/{id}")
-    public void get(@PathVariable("id") long id) {
-//        return "www.url.com/material/get/" + id;
+
+    @GetMapping("/get/{id}")
+    @ResponseBody
+    public ResponseEntity<Material> get(@PathVariable Long id) {
+        Optional<Material> material = materialRepository.findById(id);
+        return material.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/show")
