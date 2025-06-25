@@ -23,10 +23,10 @@ public class MaterialTypeController {
     public String save(@ModelAttribute Categoria categoria) {
         try {
             categoriaRepository.save(categoria);
-            return "redirect:/home";
+            return "redirect:/index";
         }catch(Exception e) {
             e.printStackTrace();
-            return "redirect:/material/type/register"; // redireciona após salvar
+            return "redirect:/material/type/register";
         }
     }
 
