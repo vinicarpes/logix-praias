@@ -57,7 +57,9 @@
                         <td class="col-2 border" th:text="${mat.nome}">Nome</td>
                         <td class="col-4 border" th:text="${mat.descricao}">Descrição</td>
                         <td class="col-1 border"><a href="#">Editar</a></td>
-                        <td class="col-1 border"><a href="#">Excluir</a></td>
+                        <td class="col-1 border"><a href="#" class="btn btn-danger btn-sm" th:attr="data-id=${mat.id}">
+                            Excluir
+                        </a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -85,5 +87,6 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"
 ></script>
+<script src="/js/excluir-dados.js"></script>
 </body>
 </html>

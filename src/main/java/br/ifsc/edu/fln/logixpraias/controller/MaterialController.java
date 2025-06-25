@@ -5,6 +5,7 @@ import br.ifsc.edu.fln.logixpraias.model.Material;
 import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/material")
@@ -35,7 +37,7 @@ public class MaterialController {
     public ModelAndView register(@ModelAttribute Material material) {
         try{
             materialRepository.save(material);
-            return new ModelAndView("redirect:/index");
+            return new ModelAndView("redirect:/material/register");
         }catch(Exception e){
             e.printStackTrace();
             return new ModelAndView("500");
@@ -58,8 +60,14 @@ public class MaterialController {
         return mv;
     }
 
-    @GetMapping("/delete/{id}")
-    public void delete(@PathVariable(value = "id") long id) {
-
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+        Optional<Material> optionalMaterial = materialRepository.findById(id);
+        if(optionalMaterial.isPresent()) {
+            materialRepository.deleteById(id);
+            return  ResponseEntity.ok().build();
+        }
+        return  ResponseEntity.notFound().build();
     }
 }
