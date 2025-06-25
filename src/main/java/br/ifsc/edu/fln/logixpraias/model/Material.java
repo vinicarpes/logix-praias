@@ -12,8 +12,9 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nome;
     private String descricao;
-    @OneToOne
+    @Transient
     private Estoque estoque = new Estoque();
     @ManyToOne
     private Categoria categoria;
