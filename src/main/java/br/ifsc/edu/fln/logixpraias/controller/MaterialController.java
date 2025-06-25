@@ -24,6 +24,7 @@ public class MaterialController {
     @GetMapping("/register")
     public ModelAndView create(Model model) {
         List<Categoria> categorias = categoriaRepository.findAll();
+        model.addAttribute("materiais", materialRepository.findAll());
         model.addAttribute("categorias", categorias);
         model.addAttribute("material",  new Material());
         ModelAndView mv = new ModelAndView("material-register");
