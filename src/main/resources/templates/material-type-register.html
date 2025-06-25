@@ -17,18 +17,18 @@
     <!-- Card para destacar o formulário -->
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <form method="get">
+            <form th:action="@{/material/type/register}" th:object="${categoria}" method="post">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
 
                     <div class="mb-3">
-                        <label for="material-type" class="form-label">Categoria de Material</label>
-                        <input class="form-control" type="text" name="material-type" id="material-type" placeholder="Insira o tipo de material">
+                        <label for="nome" class="form-label">Categoria de Material</label>
+                        <input class="form-control" type="text" th:field="*{nome}" id="nome" placeholder="Insira o tipo de material" required>
                     </div>
 
                     <div class="mb-4">
-                        <label for="description" class="form-label">Descrição</label>
-                        <textarea name="description" id="description" class="form-control" rows="3" placeholder="Descreva o tipo de material"></textarea>
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea th:field="*{descricao}" name="descricao" id="descricao" class="form-control" rows="3" placeholder="Descreva o tipo de material"></textarea>
                     </div>
                 </fieldset>
 

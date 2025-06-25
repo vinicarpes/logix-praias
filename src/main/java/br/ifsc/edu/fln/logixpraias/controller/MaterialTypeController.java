@@ -1,25 +1,33 @@
 package br.ifsc.edu.fln.logixpraias.controller;
 
+import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import br.ifsc.edu.fln.logixpraias.model.*;
 
 @Controller
 @RequestMapping("/material/type")
 public class MaterialTypeController {
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
     @GetMapping("/register")
-    public ModelAndView create(){
-        ModelAndView mv = new ModelAndView("material-type-register");
-        return mv;
+    public String create(Model model) {
+        model.addAttribute("categoria", new Categoria());
+        return "material-type-register"; // nome do HTML (sem extensão)
     }
 
-    @GetMapping("/update/{id}")
-    public void update(@PathVariable(value = "id") long id){
-
+    @PostMapping("/register")
+    public String save(@ModelAttribute Categoria categoria) {
+        try {
+            categoriaRepository.save(categoria);
+            return "redirect:/home";
+        }catch(Exception e) {
+            e.printStackTrace();
+            return "redirect:/material/type/register"; // redireciona após salvar
+        }
     }
 
     @GetMapping("/delete/{id}")
