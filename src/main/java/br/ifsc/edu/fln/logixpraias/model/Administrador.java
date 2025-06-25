@@ -5,6 +5,6 @@ import lombok.*;
 
 @Entity
 @Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
+//@AllArgsConstructor @NoArgsConstructor
 public class Administrador extends BombeiroMilitar{
 }
