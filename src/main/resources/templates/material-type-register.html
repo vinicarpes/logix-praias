@@ -31,6 +31,26 @@
                         <textarea th:field="*{descricao}" name="descricao" id="descricao" class="form-control" rows="3" placeholder="Descreva o tipo de material"></textarea>
                     </div>
                 </fieldset>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col-2">ID</th>
+                        <th scope="col-3">Categoria</th>
+                        <th scope="col-4">Descrição</th>
+                        <th scope="col-1">Editar</th>
+                        <th scope="col-1">Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cat : ${categorias}">
+                        <td class="col-2 border" th:text="${cat.id}">ID</td>
+                        <td class="col-3 border" th:text="${cat.nome}">Categoria</td>
+                        <td class="col-4 border" th:text="${cat.descricao}">Descrição</td>
+                        <td class="col-1 border"><a href="#">Editar</a></td>
+                        <td class="col-1 border"><a href="#">Excluir</a></td>
+                    </tr>
+                    </tbody>
+                </table>
 
                 <!-- Botões alinhados à direita -->
                 <div class="d-flex justify-content-end">

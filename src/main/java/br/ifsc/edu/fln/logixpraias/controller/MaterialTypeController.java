@@ -16,6 +16,7 @@ public class MaterialTypeController {
     @GetMapping("/register")
     public String create(Model model) {
         model.addAttribute("categoria", new Categoria());
+        model.addAttribute("categorias", categoriaRepository.findAll());
         return "material-type-register"; // nome do HTML (sem extensão)
     }
 
@@ -23,10 +24,10 @@ public class MaterialTypeController {
     public String save(@ModelAttribute Categoria categoria) {
         try {
             categoriaRepository.save(categoria);
-            return "redirect:/index";
+            return "redirect:/material/type/register";
         }catch(Exception e) {
             e.printStackTrace();
-            return "redirect:/material/type/register";
+            return "redirect:/500";
         }
     }
 
