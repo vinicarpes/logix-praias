@@ -23,9 +23,9 @@
 
                     <div class="mb-3">
                         <label for="material-type" class="form-label">Categoria de Material</label>
-                        <select name="material-type" id="material-type" class="form-select">
-                            <option value="">Selecione um tipo</option>
-                            <!-- opções populadas dinamicamente -->
+                        <select name="material-type" id="material-type" class="form-select" th:field="*{categorias}">
+                            <option value="" selected>Selecione um tipo</option>
+                            <option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria}"></option>
                         </select>
                     </div>
                     <div class="mb-3">
