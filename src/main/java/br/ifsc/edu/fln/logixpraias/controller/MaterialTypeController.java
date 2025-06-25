@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import br.ifsc.edu.fln.logixpraias.model.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/material/type")
 public class MaterialTypeController {
@@ -15,10 +17,10 @@ public class MaterialTypeController {
     CategoriaRepository categoriaRepository;
 
     @GetMapping("/register")
-    public String create(Model model) {
+    public String home(Model model) {
         model.addAttribute("categoria", new Categoria());
         model.addAttribute("categorias", categoriaRepository.findAll());
-        return "material-type-register"; // nome do HTML (sem extensão)
+        return "material-type-register";
     }
 
     @PostMapping("/register")
@@ -41,6 +43,30 @@ public class MaterialTypeController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/update/{id}")
+    @ResponseBody
+    public String update(@PathVariable Long id, @RequestBody Categoria categoria) {
+        Optional<Categoria> optionalCategoria = categoriaRepository.findById(id);
+
+        if (optionalCategoria.isPresent()) {
+            Categoria cat = optionalCategoria.get();
+            cat.setNome(categoria.getNome());
+            cat.setDescricao(categoria.getDescricao());
+            categoriaRepository.save(cat);
+            return "redirect:/material/type/register";
+        }
+        return "redirect:/500";
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Categoria> get(@PathVariable Long id) {
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        return categoria.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 
     @GetMapping("/show/{id}")
     public String get(@PathVariable(value = "id") long id) {
