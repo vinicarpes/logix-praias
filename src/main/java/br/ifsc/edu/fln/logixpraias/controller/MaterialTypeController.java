@@ -2,6 +2,7 @@ package br.ifsc.edu.fln.logixpraias.controller;
 
 import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,14 @@ public class MaterialTypeController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(value = "id") long id) {
-        return "delete";
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<?> delete(@PathVariable(value = "id") long id) {
+        if(categoriaRepository.existsById(id)) {
+            categoriaRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/show/{id}")
