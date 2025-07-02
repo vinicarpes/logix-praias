@@ -78,3 +78,8 @@ input, select {
 .navbar:hover {
     background-color: rgba(210, 1, 36, 0.9) !important;    /* leve escurecimento no hover */ }
 
+.tabela-container{
+    overflow-x: auto;
+    border: 1px solid #ccc;
+}
+

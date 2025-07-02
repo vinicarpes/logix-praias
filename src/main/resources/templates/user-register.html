@@ -17,13 +17,13 @@
     <!-- Card para destacar o formulário -->
     <div class="card mx-auto" style="max-width: 1000px;">
         <div class="card-body">
-            <form class="col-12" id="form-usuario" method="post" th:action="@{/user/register}" th:object="${usuario}">
+            <form class="col-12" id="form-usuario" method="POST" th:action="@{/user/register}" th:object="${usuario}">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
 
                     <div class="mb-3">
-                        <label for="permission" class="form-label">Perfil de Usuário</label>
-                        <select name="permission" id="permission" class="form-select" th:field="*{perfil}" required>
+                        <label for="perfil" class="form-label">Perfil de Usuário</label>
+                        <select name="perfil" id="perfil" class="form-select" th:field="*{perfil}" required>
                             <option value="" disabled selected>Selecione um perfil</option>
                             <option value="ADMINISTRADOR">Administrador</option>
                             <option value="GUARDA_VIDAS_CIVIL">Guarda-Vidas Civil</option>
@@ -32,13 +32,13 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="user-name" class="form-label">Nome</label>
-                        <input th:field="*{nome}" type="text" name="user-name" id="user-name" class="form-control" placeholder="Digite o nome do usuário" required>
+                        <label for="nome" class="form-label">Nome</label>
+                        <input th:field="*{nome}" type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome do usuário" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="user-id" class="form-label">Matrícula/CPF</label>
-                        <input th:field="*{mtcl}" type="text" name="user-id" id="user-id" class="form-control" placeholder="Digite a matrícula (BM) ou CPF (GVC)" required>
+                        <label for="mtcl" class="form-label">Matrícula/CPF</label>
+                        <input th:field="*{mtcl}" type="text" name="mtcl" id="mtcl" class="form-control" placeholder="Digite a matrícula (BM) ou CPF (GVC)" required>
                     </div>
 
                     <div class="mb-3">
@@ -48,9 +48,9 @@
                             <option value="GVC" id="optGvc">Guarda-Vidas Civil</option>
                             <option value="SD" name="optBm">Soldado</option>
                             <option value="CB" name="optBm">Cabo</option>
-                            <option value="3°SGT" name="optBm">Terceiro-Sargento</option>
-                            <option value="2°SGT" name="optBm">Segundo-Sargento</option>
-                            <option value="1°SGT" name="optBm">Primeiro-Sargento</option>
+                            <option value="SGT" name="optBm">Terceiro-Sargento</option>
+                            <option value="SGT" name="optBm">Segundo-Sargento</option>
+                            <option value="SGT" name="optBm">Primeiro-Sargento</option>
                             <option value="ST" name="optBm">Subtenente</option>
                             <option value="TEN" name="optBm">Segundo-Tenente</option>
                             <option value="TEN" name="optBm">Primeiro-Tenente</option>
@@ -98,11 +98,13 @@
                     <thead>
                     <tr>
                         <th scope="col-1">ID</th>
-                        <th scope="col-3">Nome</th>
-                        <th scope="col-2">CPF/Matrícula</th>
+                        <th scope="col-1">Perfil</th>
+                        <th scope="col-2">Nome</th>
+                        <th scope="col-1">CPF/Matrícula</th>
                         <th scope="col-1">Graduação/Posto</th>
                         <th scope="col-1">Setor/Praia</th>
                         <th scope="col-1">Telefone</th>
+                        <th scope="col-2">E-mail</th>
                         <th scope="col-1">Editar</th>
                         <th scope="col-1">Excluir</th>
                     </tr>
@@ -110,15 +112,17 @@
                     <tbody>
                     <tr th:each="us : ${usuarios}">
                         <td class="col-1 border" th:text="${us.id}">ID</td>
-                        <td class="col-3 border" th:text="${us.nome}">Nome</td>
-                        <td class="col-2 border" th:text="${us.mtcl}">mtcl</td>
+                        <td class="col-1 border" th:text="${us.perfil.getDescricao()}">Perfil</td>
+                        <td class="col-2 border" th:text="${us.nome}">Nome</td>
+                        <td class="col-1 border" th:text="${us.mtcl}">mtcl</td>
                         <td class="col-1 border" th:text="${us.graduacao}">Graduação/Posto</td>
-                        <td class="col-1 border" th:text="${us.setor}">Setor/Praia</td>
-                        <td class="col-1 border" th:text="${us.telefone}">telefone</td>
+                        <td class="col-1 border" th:text="${us.setor.getDescricao()}">Setor/Praia</td>
+                        <td class="col-2 border" th:text="${us.telefone}">telefone</td>
+                        <td class="col-2 border" th:text="${us.email}">Email</td>
                         <td class="col-1 border">
-                            <a href="#" class="btn btn-primary btn-sm" th:attr="data-id=${us.id}" onclick="editarUsuaio(this); return false;">Editar</a>
+                            <a href="" class="btn btn-primary btn-sm" th:attr="data-id=${us.id}" onclick="editarUsuario(this); return false;">Editar</a>
                         </td>
-                        <td class="col-1 border"><a href="#" class="btn btn-danger btn-sm" th:attr="data-id=${us.id}">
+                        <td class="col-1 border"><a href="" class="btn btn-danger btn-sm" th:attr="data-id=${us.id}">
                             Excluir
                         </a></td>
                     </tr>

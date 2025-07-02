@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     protected String nome;
     protected String email;
