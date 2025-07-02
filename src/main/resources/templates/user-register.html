@@ -15,72 +15,75 @@
 
 <div class="container">
     <!-- Card para destacar o formulário -->
-    <div class="card mx-auto" style="max-width: 600px;">
+    <div class="card mx-auto" style="max-width: 1000px;">
         <div class="card-body">
-            <form method="get">
+            <form class="col-12" id="form-usuario" method="post" th:action="@{/user/register}" th:object="${usuario}">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
 
                     <div class="mb-3">
                         <label for="permission" class="form-label">Perfil de Usuário</label>
-                        <select name="permission" id="permission" class="form-select" required>
+                        <select name="permission" id="permission" class="form-select" th:field="*{perfil}" required>
                             <option value="" disabled selected>Selecione um perfil</option>
-                            <option value="admin">Administrador</option>
-                            <option value="gvc">Guarda-Vidas Civil</option>
-                            <option value="bm">Bombeiro Militar</option>
+                            <option value="ADMINISTRADOR">Administrador</option>
+                            <option value="GUARDA_VIDAS_CIVIL">Guarda-Vidas Civil</option>
+                            <option value="BOMBEIRO_MILITAR">Bombeiro Militar</option>
                             <!-- opções populadas dinamicamente -->
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="user-name" class="form-label">Nome</label>
-                        <input type="text" name="user-name" id="user-name" class="form-control" placeholder="Digite o nome do usuário" required>
+                        <input th:field="*{nome}" type="text" name="user-name" id="user-name" class="form-control" placeholder="Digite o nome do usuário" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="user-id" class="form-label">Matrícula/CPF</label>
-                        <input type="text" name="user-id" id="user-id" class="form-control" placeholder="Digite a matrícula (BM) ou CPF (GVC)" required>
+                        <input th:field="*{mtcl}" type="text" name="user-id" id="user-id" class="form-control" placeholder="Digite a matrícula (BM) ou CPF (GVC)" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="user-grad" class="form-label">Graduação/Posto</label>
-                        <select type="text" name="user-grad" id="user-grad" class="form-control" required>
+                        <select th:field="*{graduacao}" type="text" name="user-grad" id="user-grad" class="form-control" required>
                             <option value="" disabled selected>Selecione a graduação/posto</option>
-                            <option value="GVC">Guarda-Vidas Civil</option>
-                            <option value="SD">Soldado</option>
-                            <option value="CB">Cabo</option>
-                            <option value="3°SGT">Terceiro-Sargento</option>
-                            <option value="2°SGT">Segundo-Sargento</option>
-                            <option value="1°SGT">Primeiro-Sargento</option>
-                            <option value="ST">Subtenente</option>
-                            <option value="2°TEN">Segundo-Tenente</option>
-                            <option value="1°TEN">Primeiro-Tenente</option>
-                            <option value="CAP">Capitão</option>
-                            <option value="MAJ">Major</option>
-                            <option value="TEN-CEL">Tenente-Coronel</option>
-                            <option value="CEL">Coronel</option>
+                            <option value="GVC" id="optGvc">Guarda-Vidas Civil</option>
+                            <option value="SD" name="optBm">Soldado</option>
+                            <option value="CB" name="optBm">Cabo</option>
+                            <option value="3°SGT" name="optBm">Terceiro-Sargento</option>
+                            <option value="2°SGT" name="optBm">Segundo-Sargento</option>
+                            <option value="1°SGT" name="optBm">Primeiro-Sargento</option>
+                            <option value="ST" name="optBm">Subtenente</option>
+                            <option value="TEN" name="optBm">Segundo-Tenente</option>
+                            <option value="TEN" name="optBm">Primeiro-Tenente</option>
+                            <option value="CAP" name="optBm">Capitão</option>
+                            <option value="MAJ" name="optBm">Major</option>
+                            <option value="TEN-CEL" name="optBm">Tenente-Coronel</option>
+                            <option value="CEL" name="optBm">Coronel</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="user-beach" class="form-label">Praia</label>
-                        <select type="text" name="user-obm" id="user-beach" class="form-control" required>
-                            <option value="" disabled selected>Selecione a Praia</option>
+                        <select th:field="*{setor}" type="text" name="user-obm" id="user-beach" class="form-control" required>
+                            <option value=""  selected disabled>Selecione a Praia</option>
+                            <option value="BBM_1">1° BBM</option>
+                            <option value="BBM_1_2">1°/2° BBM</option>
+                            <option value="BBM_1_2_1">1°/2°/1° BBM</option>
+                            <option value="BBM_1_2_2">1°/2°/2° BBM</option>
+                            <option value="BBM_1_3_1">1°/3°/1° BBM</option>
+                            <option value="BBM_1_3">1°/3°BBM</option>
+                            <option value="CEBM">CEBM</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="user-phone" class="form-label">Telefone</label>
-                        <input type="text" name="user-phone" id="user-phone" class="form-control" placeholder="(48)91234-5678" required>
+                        <input th:field="*{telefone}" type="text" name="user-phone" id="user-phone" class="form-control" placeholder="(48)91234-5678" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="user-email" class="form-label">E-mail</label>
-                        <input type="email" name="user-email" id="user-email" class="form-control" placeholder="exemplo@gmail.com" required>
+                        <input th:field="*{email}" type="email" name="user-email" id="user-email" class="form-control" placeholder="exemplo@gmail.com" required>
                     </div>
 
-
-                </fieldset>
-
-                <!-- Botões alinhados à direita -->
                 <div class="d-flex justify-content-end">
                     <button type="reset" class="btn btn-secondary me-2">
                         <i class="bi bi-x-circle"></i> Cancelar
@@ -89,6 +92,39 @@
                         <i class="bi bi-save"></i> Cadastrar
                     </button>
                 </div>
+
+                </fieldset>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col-1">ID</th>
+                        <th scope="col-3">Nome</th>
+                        <th scope="col-2">CPF/Matrícula</th>
+                        <th scope="col-1">Graduação/Posto</th>
+                        <th scope="col-1">Setor/Praia</th>
+                        <th scope="col-1">Telefone</th>
+                        <th scope="col-1">Editar</th>
+                        <th scope="col-1">Excluir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="us : ${usuarios}">
+                        <td class="col-1 border" th:text="${us.id}">ID</td>
+                        <td class="col-3 border" th:text="${us.nome}">Nome</td>
+                        <td class="col-2 border" th:text="${us.mtcl}">mtcl</td>
+                        <td class="col-1 border" th:text="${us.graduacao}">Graduação/Posto</td>
+                        <td class="col-1 border" th:text="${us.setor}">Setor/Praia</td>
+                        <td class="col-1 border" th:text="${us.telefone}">telefone</td>
+                        <td class="col-1 border">
+                            <a href="#" class="btn btn-primary btn-sm" th:attr="data-id=${us.id}" onclick="editarUsuaio(this); return false;">Editar</a>
+                        </td>
+                        <td class="col-1 border"><a href="#" class="btn btn-danger btn-sm" th:attr="data-id=${us.id}">
+                            Excluir
+                        </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- Botões alinhados à direita -->
             </form>
         </div>
     </div>
@@ -102,6 +138,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"
 ></script>
+
+<script src="/js/crud-usuarios.js"></script>
 
 </body>
 </html>

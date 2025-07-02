@@ -1,5 +1,8 @@
 package br.ifsc.edu.fln.logixpraias.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum ESetor {
     BBM_1("1° BBM"),
     BBM_1_2("1°/2° BBM"),
