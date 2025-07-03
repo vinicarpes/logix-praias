@@ -68,12 +68,6 @@ public class MaterialController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/show")
-    public ModelAndView show() {
-        ModelAndView mv = new ModelAndView("show-storage");
-        return mv;
-    }
-
     @DeleteMapping("/delete/{id}")
     @ResponseBody
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
