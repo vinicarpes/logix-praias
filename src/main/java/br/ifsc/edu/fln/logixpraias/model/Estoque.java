@@ -1,5 +1,6 @@
 package br.ifsc.edu.fln.logixpraias.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,5 +16,6 @@ public class Estoque {
     private int quantidade = 0;
     @OneToOne
     @JoinColumn(name = "material_id")
+    @JsonIgnore
     private Material material;
 }

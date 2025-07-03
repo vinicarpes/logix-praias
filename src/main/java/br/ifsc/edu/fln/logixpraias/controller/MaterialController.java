@@ -4,6 +4,7 @@ import br.ifsc.edu.fln.logixpraias.model.Categoria;
 import br.ifsc.edu.fln.logixpraias.model.Material;
 import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
+import br.ifsc.edu.fln.logixpraias.repository.EstoqueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ public class MaterialController {
     private CategoriaRepository categoriaRepository;
     @Autowired
     private MaterialRepository materialRepository;
+    @Autowired
+    private EstoqueRepository estoqueRepository;
 
     @GetMapping("/register")
     public ModelAndView create(Model model) {
@@ -36,6 +39,7 @@ public class MaterialController {
     @PostMapping("/register")
     public ModelAndView register(@ModelAttribute Material material) {
         try{
+            material.getEstoque().setMaterial(material);
             materialRepository.save(material);
             return new ModelAndView("redirect:/material/register");
         }catch(Exception e){

@@ -14,7 +14,7 @@ public class Material {
     private Long id;
     private String nome;
     private String descricao;
-    @Transient
+    @OneToOne(mappedBy = "material", cascade = CascadeType.ALL)
     private Estoque estoque = new Estoque();
     @ManyToOne
     private Categoria categoria;
