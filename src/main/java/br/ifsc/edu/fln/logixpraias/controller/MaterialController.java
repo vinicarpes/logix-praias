@@ -78,4 +78,10 @@ public class MaterialController {
         }
         return  ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/by-category")
+    @ResponseBody
+    public List<Material> getMaterialsByCategory(@RequestParam Long categoriaId) {
+        return materialRepository.findByCategoriaId(categoriaId);
+    }
 }
