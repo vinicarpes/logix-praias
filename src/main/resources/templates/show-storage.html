@@ -17,8 +17,7 @@
     <div class="mt-4 container">
         <div class="card mx-auto" >
             <div class="card-body">
-
-                <form method="get">
+                <form class="col-12" id="form-storages" method="GET" th:action="@{/storage/get}" th:object="${estoques}">
                     <fieldset class="border rounded p-4 mb-4">
                         <legend class="w-auto px-2 text-center"> Preencha os dados do formulário</legend>
 
@@ -26,6 +25,7 @@
                             <label for="categoria" class="form-label">Categoria de Material</label>
                             <select class="form-select" type="text" name="categoria" id="categoria">
                                 <option selected disabled value="">Selecione o tipo de material</option>
+                                <option th:each="categoria : ${categorias}" th:value="${categoria.getId()}" th:text="${categoria}"></option>
                             </select>
                         </div>
 
@@ -33,14 +33,15 @@
                             <label for="material" class="form-label">Material</label>
                             <select class="form-select" type="text" name="material" id="material">
                                 <option selected disabled value="">Selecione o material</option>
+                                <option th:each="material : ${materiais}" th:value="${material.getId()}" th:text="${material}"></option>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Quantidade </label>
-                                <input type="radio" name="quantity-param"> Menor
-                                <input type="radio" name="quantity-param"> Maior
-                                <input type="radio" name="quantity-param"> Exata
+                                <input type="radio" name="quantity-param" value="menor"> Menor
+                                <input type="radio" name="quantity-param" value="maior"> Maior
+                                <input type="radio" name="quantity-param" value="igual"> Exata
                             <input type="number" class="form-control" placeholder="Quantidade" name="quantity" id="quantity">
                         </div>
                     </fieldset>
@@ -67,12 +68,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="col-1 border" >ID</td>
-                        <td class="col-3 border"  >Categoria de Material</td>
-                        <td class="col-4 border" >Material</td>
-                        <td class="col-1 border"  >Quantidade</td>
-                        <td class="col-1 border" ><a>Registros</a></td>
+                    <tr th:each="es : ${estoques}">
+                        <td class="col-1 border" th:text="*{es.getId()}">ID</td>
+                        <td class="col-3 border" th:text="*{es.getMaterial().getCategoria()}" >Categoria de Material</td>
+                        <td class="col-4 border" th:text="*{es.getMaterial()}" >Material</td>
+                        <td class="col-1 border" th:text="*{es.getQuantidade()}"  >Quantidade</td>
+                        <td class="col-1 border"><a>Registros</a></td>
                     </tr>
                     </tbody>
                 </table>

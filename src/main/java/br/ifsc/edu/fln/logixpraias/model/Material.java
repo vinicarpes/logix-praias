@@ -18,4 +18,9 @@ public class Material {
     private Estoque estoque = new Estoque();
     @ManyToOne
     private Categoria categoria;
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

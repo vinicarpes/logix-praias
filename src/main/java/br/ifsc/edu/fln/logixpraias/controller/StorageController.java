@@ -1,5 +1,9 @@
 package br.ifsc.edu.fln.logixpraias.controller;
 
+import br.ifsc.edu.fln.logixpraias.model.Categoria;
+import br.ifsc.edu.fln.logixpraias.model.Material;
+import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
+import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,10 +18,16 @@ import java.util.List;
 public class StorageController {
     @Autowired
     private EstoqueRepository estoqueRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+    @Autowired
+    private MaterialRepository materialRepository;
 
     @GetMapping("/show")
     public ModelAndView show() {
         ModelAndView mv = new ModelAndView("show-storage");
+        List<Estoque> estoques = estoqueRepository.findAll();
+        mv.addObject("estoques", estoques);
         return mv;
     }
 
@@ -34,10 +44,14 @@ public class StorageController {
         spec = spec.and(EstoqueSpecification.temCategoria(categoria));
         spec = spec.and(EstoqueSpecification.quantidade(op, quantity));
 
-        List<Estoque> resultados = estoqueRepository.findAll(spec);
+        List<Estoque> estoques = estoqueRepository.findAll(spec);
+        List<Categoria> categorias = categoriaRepository.findAll();
+        List<Material> materiais = materialRepository.findAll();
 
         ModelAndView mv = new ModelAndView("show-storage");
-        mv.addObject("estoques", resultados);
+        mv.addObject("estoques", estoques);
+        mv.addObject("categorias", categorias);
+        mv.addObject("materiais", materiais);
         return mv;
     }
 
