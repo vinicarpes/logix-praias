@@ -75,12 +75,17 @@ public ModelAndView buscarEstoque(
     Pageable pageable = PageRequest.of(page, size);
     Page<Estoque> estoquesPage = estoqueRepository.findAll(spec, pageable);
 
+    int totalPages = estoquesPage.getTotalPages();
+    if (totalPages <= 0) {
+        totalPages = 1;
+    }
+
     List<Categoria> categorias = categoriaRepository.findAll();
     List<Material> materiais = materialRepository.findAll();
 
     ModelAndView mv = new ModelAndView("show-storage");
     mv.addObject("estoques", estoquesPage.getContent());
-    mv.addObject("totalPages", estoquesPage.getTotalPages());
+    mv.addObject("totalPages",totalPages);
     mv.addObject("currentPage", page);
     mv.addObject("categorias", categorias);
     mv.addObject("materiais", materiais);
