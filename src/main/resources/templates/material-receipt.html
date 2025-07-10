@@ -16,9 +16,9 @@
 
 <div class="container">
     <!-- Card para destacar o formulário -->
-    <div class="card mx-auto" style="max-width: 600px;">
+    <div class="card mx-auto">
         <div class="card-body">
-            <form id="form-recebimento" method="post" th:action="@{/material/receipt}" th:object="${materialReceipt}">
+            <form class="col-12" id="form-recebimento" method="post" th:action="@{/material/receipt}" th:object="${materialReceipt}">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center">Preencha os dados do formulário</legend>
 
@@ -36,6 +36,13 @@
                         <select name="material" id="material" class="form-select" th:field="*{material}" required>
                             <option value="" selected disabled>Selecione um material</option>
                             <option th:each="material : ${materiais}" th:value="${material.getId()}" th:text="${material}">Selecione um material</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resp-withdrawal" class="form-label">Responsável da Retirada</label>
+                        <select th:field="*{usuario}" name="resp-withdrawal" id="resp-withdrawal" class="form-select" required>
+                            <option value="" selected disabled>Selecione um material</option>
+                            <option th:each="usuario : ${usuarios}" th:value="${usuario.getId()}" th:text="${usuario}">Selecione um material</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -78,6 +85,70 @@
                     </button>
                 </div>
                 </fieldset>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col-1">ID</th>
+                        <th scope="col-2">Material</th>
+                        <th scope="col-2">Responsável</th>
+                        <th scope="col-2">Data</th>
+                        <th scope="col-2">Fornecedor</th>
+                        <th scope="col-1">Quantidade</th>
+                        <th scope="col-1">Descrição</th>
+                        <th scope="col-1">Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="rec : ${recebimentos}">
+                        <td class="col-1 border" th:text="${rec.id}">ID</td>
+                        <td class="col-2 border" th:text="${rec.material}">Material</td>
+                        <td class="col-2 border" th:text="${rec.usuario}">Responsável</td>
+                        <td class="col-2 border" th:text="${rec.fornecedor}">Fornecedor</td>
+                        <td class="col-1 border" th:text="${rec.quantidade}">Quantidade</td>
+                        <td class="col-1 border" th:text="${rec.descricao}">Descrição</td>
+                        <td class="col-1 border">
+                            <a href="#" class="btn btn-primary btn-sm" th:attr="data-id=${rec.id}" onclick="editarRecebimento(this); return false;">Editar</a>
+                        </td>
+                        <td class="col-1 border"><a href="#" class="btn btn-danger btn-sm" th:attr="data-id=${rec.id}">
+                            Excluir
+                        </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center mt-3">
+                    <nav>
+                        <th:block th:with="totalPagesSafe=${totalPages > 0 ? totalPages : 1}">
+                            <ul class="pagination">
+
+                                <li class="page-item" th:if="${currentPage > 1}">
+                                    <a class="page-link"
+                                       th:href="@{/material/receipt(page=${currentPage - 1})}">
+                                        Anterior
+                                    </a>
+                                </li>
+
+
+                                <li class="page-item"
+                                    th:each="i : ${#numbers.sequence(1, totalPagesSafe)}"
+                                    th:classappend="${i} == ${currentPage} ? 'active'">
+                                    <a class="page-link"
+                                       th:href="@{/material/receipt(page=${i})}"
+                                       th:text="${i}">1</a>
+                                </li>
+
+
+                                <li class="page-item" th:if="${currentPage < totalPagesSafe}">
+                                    <a class="page-link"
+                                       th:href="@{/material/receipt(page=${currentPage + 1})}">
+                                        Próximo
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </th:block>
+                    </nav>
+
+                </div>
 
                 <!-- Botões alinhados à direita -->
             </form>
