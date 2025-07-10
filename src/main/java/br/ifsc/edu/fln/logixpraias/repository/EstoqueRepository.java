@@ -13,4 +13,8 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Long>, JpaSpec
 
     Page<Estoque> findAll(Pageable pageable);
 
+    int findQuatindadeById(Long id);
+    Estoque getEstoqueById(Long id);
+
+
 }

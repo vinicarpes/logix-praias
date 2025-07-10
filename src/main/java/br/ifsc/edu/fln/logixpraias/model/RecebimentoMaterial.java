@@ -17,7 +17,6 @@ public class RecebimentoMaterial {
     private int quantidade;
     private String descricao;
     private LocalDateTime dataRecebimento = LocalDateTime.now();
-    private LocalDate dataValidade = null;
     private String fornecedor;
     @ManyToOne
     private Usuario usuario;

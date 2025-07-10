@@ -18,57 +18,56 @@
     <!-- Card para destacar o formulário -->
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <form method="get">
+            <form id="form-recebimento" method="post" th:action="@{/material/receipt}" th:object="${materialReceipt}">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center">Preencha os dados do formulário</legend>
 
                     <div class="mb-3">
                         <label for="material-type" class="form-label">Categoria de Material</label>
                         <select name="material-type" id="material-type" class="form-select" required>
-                            <option value="">Selecione um tipo</option>
+                            <option value="" selected disabled>Selecione uma categoria</option>
+                            <option th:each="categoria : ${categorias}" th:value="${categoria.getId()}" th:text="${categoria}">Selecione um tipo</option>
                             <!-- opções populadas dinamicamente -->
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="material" class="form-label">Material Recebido</label>
-                        <select name="material" id="material" class="form-select" required>
-                            <option value="">Selecione um material</option>
-                            <!-- opções populadas dinamicamente -->
+                        <select name="material" id="material" class="form-select" th:field="*{material}" required>
+                            <option value="" selected disabled>Selecione um material</option>
+                            <option th:each="material : ${materiais}" th:value="${material.getId()}" th:text="${material}">Selecione um material</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="receipt-date" class="form-label">Data de Recebimento</label>
                         <input type="date" name="receipt-date" id="receipt-date" class="form-control" required>
                     </div>
 
-                    <p class="d-inline-flex gap-1">
-                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#dueCollapse" role="button" aria-expanded="false" aria-controls="dueCollapse">
-                            Inserir validade
-                        </a>
-                    </p>
-                    <div class="collapse" id="dueCollapse">
-                    <div class="mb-3">
-                        <label for="due-date" class="form-label">Data de Validade</label>
-                        <input type="date" name="due-date" id="due-date" class="form-control">
-                    </div>
-                    </div>
+<!--                    <p class="d-inline-flex gap-1">-->
+<!--                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#dueCollapse" role="button" aria-expanded="false" aria-controls="dueCollapse">-->
+<!--                            Inserir validade-->
+<!--                        </a>-->
+<!--                    </p>-->
+<!--                    <div class="collapse" id="dueCollapse">-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="due-date" class="form-label">Data de Validade</label>-->
+<!--                        <input type="date" name="due-date" id="due-date" class="form-control">-->
+<!--                    </div>-->
+<!--                    </div>-->
 
                     <div class="mb-3">
                         <label for="supplier" class="form-label">Fornecedor</label>
-                        <input type="text" name="supplier" id="supplier" class="form-control" placeholder="Insira o forncedor">
+                        <input th:field="*{fornecedor}" type="text" name="supplier" id="supplier" class="form-control" placeholder="Insira o forncedor">
                     </div>
 
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Quantidade</label>
-                        <input type="number" min="0" step="1" name="quantity" id="quantity" class="form-control" placeholder="Insira a quantidade">
+                        <input th:field="*{quantidade}" type="number" min="0" step="1" name="quantity" id="quantity" class="form-control" placeholder="Insira a quantidade">
                     </div>
-
 
                     <div class="mb-4">
                         <label for="description" class="form-label">Descrição</label>
-                        <textarea name="description" id="description" class="form-control" rows="3" placeholder="Descreva o material"></textarea>
+                        <textarea th:field="*{descricao}" name="description" id="description" class="form-control" rows="3" placeholder="Descreva o material"></textarea>
                     </div>
                 <div class="d-flex justify-content-end">
                     <button type="reset" class="btn btn-secondary me-2">
