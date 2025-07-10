@@ -92,28 +92,33 @@
                 </table>
                 <div class="d-flex justify-content-center mt-3">
                     <nav>
-                        <ul class="pagination">
-                            <li class="page-item" th:if="${currentPage > 0}">
-                                <a class="page-link"
-                                   th:href="@{/storage/get(page=${currentPage - 1}, material=${filtroMaterial}, categoria=${filtroCategoria}, quantity=${filtroQuantity}, 'quantity-param'=${filtroOp})}">
-                                    Anterior
-                                </a>
-                            </li>
+                        <th:block th:with="totalPagesSafe=${totalPages ?: 1}">
+                            <ul class="pagination">
 
-                            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                                th:classappend="${i} == ${currentPage} ? 'active'">
-                                <a class="page-link"
-                                   th:href="@{/storage/get(page=${i}, material=${filtroMaterial}, categoria=${filtroCategoria}, quantity=${filtroQuantity}, 'quantity-param'=${filtroOp})}"
-                                   th:text="${i + 1}">1</a>
-                            </li>
+                                <li class="page-item" th:if="${currentPage > 0}">
+                                    <a class="page-link"
+                                       th:href="@{/storage/get(page=${currentPage - 1}, material=${filtroMaterial}, categoria=${filtroCategoria}, quantity=${filtroQuantity}, 'quantity-param'=${filtroOp})}">
+                                        Anterior
+                                    </a>
+                                </li>
 
-                            <li class="page-item" th:if="${currentPage < totalPages - 1}">
-                                <a class="page-link"
-                                   th:href="@{/storage/get(page=${currentPage + 1}, material=${filtroMaterial}, categoria=${filtroCategoria}, quantity=${filtroQuantity}, 'quantity-param'=${filtroOp})}">
-                                    Próximo
-                                </a>
-                            </li>
-                        </ul>
+                                <li class="page-item"
+                                    th:each="i : ${#numbers.sequence(0, totalPagesSafe - 1)}"
+                                    th:classappend="${i} == ${currentPage} ? 'active'">
+                                    <a class="page-link"
+                                       th:href="@{/storage/get(page=${i}, material=${filtroMaterial}, categoria=${filtroCategoria}, quantity=${filtroQuantity}, 'quantity-param'=${filtroOp})}"
+                                       th:text="${i + 1}">1</a>
+                                </li>
+
+                                <li class="page-item" th:if="${currentPage < totalPagesSafe - 1}">
+                                    <a class="page-link"
+                                       th:href="@{/storage/get(page=${currentPage + 1}, material=${filtroMaterial}, categoria=${filtroCategoria}, quantity=${filtroQuantity}, 'quantity-param'=${filtroOp})}">
+                                        Próximo
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </th:block>
                     </nav>
                 </div>
 
