@@ -3,10 +3,14 @@ package br.ifsc.edu.fln.logixpraias.controller;
 import br.ifsc.edu.fln.logixpraias.model.*;
 import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
+import br.ifsc.edu.fln.logixpraias.repository.MaterialWithdrawalRepository;
 import br.ifsc.edu.fln.logixpraias.repository.UsuarioRepository;
 import br.ifsc.edu.fln.logixpraias.services.RecebimentoService;
 import br.ifsc.edu.fln.logixpraias.services.RetiradaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +29,31 @@ public class MaterialWithdrawalController {
     RetiradaService retiradaService;
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    MaterialWithdrawalRepository retiradaRepository;
 
     @GetMapping("")
-    public ModelAndView home() {
-        List<Categoria> categorias = categoriaRepository.findAll();
+    public ModelAndView home(@RequestParam(defaultValue = "1") int page,
+                             @RequestParam(defaultValue = "10") int size) {
+
         List<Material> materiais = materialRepository.findAll();
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<RetiradaMaterial> recebimentoPages = retiradaRepository.findAll(pageable);
+
+        int totalPages = recebimentoPages.getTotalPages();
+        if (totalPages <= 0) {
+            totalPages = 1;
+        }
+
         List<Usuario> usuarios = usuarioRepository.findAll();
+
         ModelAndView mv = new ModelAndView("material-withdrawal");
+        mv.addObject("totalPages",totalPages);
+        mv.addObject("currentPage", page);
         mv.addObject("materialWithdrawal", new RetiradaMaterial());
-        mv.addObject("categorias", categorias);
+        mv.addObject("retiradas", retiradaRepository.findAll());
+        mv.addObject("categorias", categoriaRepository.findAll());
         mv.addObject("materiais", materiais);
         mv.addObject("usuarios", usuarios);
         return mv;

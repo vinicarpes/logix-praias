@@ -15,9 +15,9 @@
 
 <div class="container">
     <!-- Card para destacar o formulário -->
-    <div class="card mx-auto" style="max-width: 600px;">
+    <div class="card mx-auto">
         <div class="card-body">
-            <form  id="form-retirada" method="post" th:action="@{/material/withdrawal}" th:object="${materialWithdrawal}">
+            <form class="col-12" id="form-retirada" method="post" th:action="@{/material/withdrawal}" th:object="${materialWithdrawal}">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center">Preencha os dados do formulário</legend>
 
@@ -70,6 +70,66 @@
                     </button>
                 </div>
                 </fieldset>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col-1">ID</th>
+                        <th scope="col-2">Material</th>
+                        <th scope="col-2">Responsável</th>
+                        <th scope="col-1">Quantidade</th>
+                        <th scope="col-1">Data</th>
+                        <th scope="col-3">Observação</th>
+                        <th scope="col-1">Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ret : ${retiradas}">
+                        <td class="col-1 border" th:text="${ret.id}">ID</td>
+                        <td class="col-2 border" th:text="${ret.material}">Material</td>
+                        <td class="col-2 border" th:text="${ret.usuario}">Responsável</td>
+                        <td class="col-1 border" th:text="${ret.quantidade}">Quantidade</td>
+                        <td class="col-1 border" th:text="${ret.dataRetirada}">Data</td>
+                        <td class="col-3 border" th:text="${ret.observacao}">Observação</td>
+                        <td class="col-1 border">
+                            <a href="#" class="btn btn-primary btn-sm" th:attr="data-id=${ret.id}" onclick="editarRetirada(this); return false;">Editar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center mt-3">
+                    <nav>
+                        <th:block th:with="totalPagesSafe=${totalPages > 0 ? totalPages : 1}">
+                            <ul class="pagination">
+
+                                <li class="page-item" th:if="${currentPage > 1}">
+                                    <a class="page-link"
+                                       th:href="@{/material/receipt(page=${currentPage - 1})}">
+                                        Anterior
+                                    </a>
+                                </li>
+
+
+                                <li class="page-item"
+                                    th:each="i : ${#numbers.sequence(1, totalPagesSafe)}"
+                                    th:classappend="${i} == ${currentPage} ? 'active'">
+                                    <a class="page-link"
+                                       th:href="@{/material/receipt(page=${i})}"
+                                       th:text="${i}">1</a>
+                                </li>
+
+
+                                <li class="page-item" th:if="${currentPage < totalPagesSafe}">
+                                    <a class="page-link"
+                                       th:href="@{/material/receipt(page=${currentPage + 1})}">
+                                        Próximo
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </th:block>
+                    </nav>
+
+                </div>
 
                 <!-- Botões alinhados à direita -->
             </form>
