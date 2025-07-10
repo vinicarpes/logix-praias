@@ -30,4 +30,8 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     protected ESetor setor;
 
+    @Override
+    public String toString() {
+        return graduacao + " " + nome;
+    }
 }

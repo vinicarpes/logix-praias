@@ -29,4 +29,14 @@ public class EstoqueService {
         es.setQuantidade(es.getQuantidade() + quantidade);
         estoqueRepository.save(es);
     }
+
+    public void retirar(Long estoqueId, Integer quantidade) throws Exception {
+        Estoque es = estoqueRepository.getEstoqueById(estoqueId);
+        if (es.getQuantidade() >= quantidade) {
+            es.setQuantidade(es.getQuantidade() - quantidade);
+            estoqueRepository.save(es);
+        }else{
+            throw new Exception("O valor informado é maior que a quantidade em estoque");
+        }
+    }
 }

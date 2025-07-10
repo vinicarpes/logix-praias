@@ -3,6 +3,9 @@ package br.ifsc.edu.fln.logixpraias.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -13,6 +16,7 @@ public class RetiradaMaterial {
     private Long id;
     private int quantidade;
     private String observacao;
+    private LocalDate dataRetirada = LocalDate.now();
     @ManyToOne
     private Usuario usuario;
     @ManyToOne

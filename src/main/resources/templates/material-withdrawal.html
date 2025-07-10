@@ -17,48 +17,49 @@
     <!-- Card para destacar o formulário -->
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <form method="get">
+            <form  id="form-retirada" method="post" th:action="@{/material/withdrawal}" th:object="${materialWithdrawal}">
                 <fieldset class="border rounded p-4 mb-4">
                     <legend class="w-auto px-2 text-center">Preencha os dados do formulário</legend>
 
                     <div class="mb-3">
                         <label for="material-type" class="form-label">Categoria de Material</label>
                         <select name="material-type" id="material-type" class="form-select" required>
-                            <option value="">Selecione um tipo</option>
+                            <option value="" selected disabled>Selecione uma categoria</option>
+                            <option th:each="categoria : ${categorias}" th:value="${categoria.getId()}" th:text="${categoria}">Selecione um tipo</option>
                             <!-- opções populadas dinamicamente -->
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="material" class="form-label">Material Retirado</label>
-                        <select name="material" id="material" class="form-select" required>
-                            <option value="">Selecione um material</option>
-                            <!-- opções populadas dinamicamente -->
+                        <select th:field="*{material}" name="material" id="material" class="form-select" required>
+                            <option value="" selected disabled>Selecione um material</option>
+                            <option th:each="material : ${materiais}" th:value="${material.getId()}" th:text="${material}">Selecione um material</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="resp-withdrawal" class="form-label">Responsável da Retirada</label>
-                        <select name="resp-withdrawal" id="resp-withdrawal" class="form-select" required>
-                            <option value="">Selecione quem retirou o material</option>
-                            <!-- opções populadas dinamicamente -->
+                        <select th:field="*{usuario}" name="resp-withdrawal" id="resp-withdrawal" class="form-select" required>
+                            <option value="" selected disabled>Selecione um material</option>
+                            <option th:each="usuario : ${usuarios}" th:value="${usuario.getId()}" th:text="${usuario}">Selecione um material</option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="withdrawal-date" class="form-label">Data de Retirada</label>
-                        <input type="date" name="withdrawal-date" id="withdrawal-date" class="form-control" required>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="withdrawal-date" class="form-label">Data de Retirada</label>-->
+<!--                        <input type="date" name="withdrawal-date" id="withdrawal-date" class="form-control" required>-->
+<!--                    </div>-->
 
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Quantidade</label>
-                        <input type="number" min="0" step="1" name="quantity" id="quantity" class="form-control" placeholder="Insira a quantidade">
+                        <input th:field="*{quantidade}" type="number" min="0" step="1" name="quantity" id="quantity" class="form-control" placeholder="Insira a quantidade">
                     </div>
 
 
                     <div class="mb-4">
                         <label for="observation" class="form-label">Observações</label>
-                        <textarea name="observation" id="observation" class="form-control" rows="3" placeholder="Observações..."></textarea>
+                        <textarea th:field="*{observacao}" name="observation" id="observation" class="form-control" rows="3" placeholder="Observações..."></textarea>
                     </div>
                 <div class="d-flex justify-content-end">
                     <button type="reset" class="btn btn-secondary me-2">
