@@ -7,16 +7,20 @@ import br.ifsc.edu.fln.logixpraias.repository.MaterialWithdrawalRepository;
 import br.ifsc.edu.fln.logixpraias.repository.UsuarioRepository;
 import br.ifsc.edu.fln.logixpraias.services.RecebimentoService;
 import br.ifsc.edu.fln.logixpraias.services.RetiradaService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/material/withdrawal")
@@ -68,5 +72,36 @@ public class MaterialWithdrawalController {
             e.printStackTrace();
             return new ModelAndView("500");
         }
+    }
+
+//    @PutMapping("/update/{id}")
+//    @ResponseBody
+//    public ModelAndView update(@ModelAttribute RetiradaMaterial retirada, @PathVariable Long id) throws SQLException{
+//        Optional<RetiradaMaterial> optional = retiradaRepository.findById(id);
+//        if(optional.isPresent()){
+//            BeanUtils.copyProperties(retirada, optional.get(),"id");
+//            retiradaRepository.save(optional.get());
+//            return new ModelAndView("redirect:/material/withdrawal");
+//        }
+//        return new ModelAndView("500");
+//    }
+
+    @PutMapping("/update/{id}")
+    @ResponseBody
+    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody RetiradaMaterial retirada) {
+        if (retiradaRepository.existsById(id)) {
+            retirada.setId(id);
+            retiradaRepository.save(retirada);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/get/{id}")
+    @ResponseBody
+    public ResponseEntity<RetiradaMaterial> get(@PathVariable Long id) {
+        Optional<RetiradaMaterial> retirada = retiradaRepository.findById(id);
+        return retirada.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

@@ -78,7 +78,7 @@
                         <th scope="col-2">Responsável</th>
                         <th scope="col-1">Quantidade</th>
                         <th scope="col-1">Data</th>
-                        <th scope="col-3">Observação</th>
+                        <th scope="col-2">Observação</th>
                         <th scope="col-1">Editar</th>
                     </tr>
                     </thead>
@@ -89,7 +89,7 @@
                         <td class="col-2 border" th:text="${ret.usuario}">Responsável</td>
                         <td class="col-1 border" th:text="${ret.quantidade}">Quantidade</td>
                         <td class="col-1 border" th:text="${ret.dataRetirada}">Data</td>
-                        <td class="col-3 border" th:text="${ret.observacao}">Observação</td>
+                        <td class="col-2 border" th:text="${ret.observacao}">Observação</td>
                         <td class="col-1 border">
                             <a href="#" class="btn btn-primary btn-sm" th:attr="data-id=${ret.id}" onclick="editarRetirada(this); return false;">Editar</a>
                         </td>
@@ -144,6 +144,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"
 ></script>
+<script src="/js/crud-retiradas.js"></script>
 
 </body>
 </html>
