@@ -1,9 +1,6 @@
 package br.ifsc.edu.fln.logixpraias.controller;
 
-import br.ifsc.edu.fln.logixpraias.model.Categoria;
-import br.ifsc.edu.fln.logixpraias.model.Estoque;
-import br.ifsc.edu.fln.logixpraias.model.Material;
-import br.ifsc.edu.fln.logixpraias.model.RecebimentoMaterial;
+import br.ifsc.edu.fln.logixpraias.model.*;
 import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialReceiptRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
@@ -14,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/material/receipt")
@@ -72,23 +71,23 @@ public class MaterialReceiptController {
             return new ModelAndView("500");
         }
     }
+    @PutMapping("/update/{id}")
+    @ResponseBody
+    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody RecebimentoMaterial recebimento) {
+        if (recebimentoRepository.existsById(id)) {
+            recebimento.setId(id);
+            recebimentoRepository.save(recebimento);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 
-//    @GetMapping("/update/{id}")
-//    public ModelAndView update(@PathVariable(value = "id") long id) {
-//        ModelAndView mv = new ModelAndView("");
-//        return mv;
-//    }
-
-//    @GetMapping("/show")
-//    public ModelAndView show(){
-//        ModelAndView mv = new ModelAndView("show-storage");
-//        return mv;
-//    }
-//
-//    @GetMapping("/show/{id}")
-//    public ModelAndView show(@PathVariable(value = "id") long id){
-//        ModelAndView mv = new ModelAndView("");
-//        return mv;
-//    }
+    @GetMapping("/get/{id}")
+    @ResponseBody
+    public ResponseEntity<RecebimentoMaterial> get(@PathVariable Long id) {
+        Optional<RecebimentoMaterial> recebimento = recebimentoRepository.findById(id);
+        return recebimento.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
 
