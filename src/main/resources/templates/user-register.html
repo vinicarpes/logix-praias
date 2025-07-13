@@ -94,42 +94,75 @@
                 </div>
 
                 </fieldset>
-                <table class="table">
+            </form>
+            <hr>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th scope="col-1">ID</th>
-                        <th scope="col-1">Perfil</th>
-                        <th scope="col-2">Nome</th>
-                        <th scope="col-1">CPF/Matrícula</th>
-                        <th scope="col-1">Graduação/Posto</th>
-                        <th scope="col-1">Setor/Praia</th>
-                        <th scope="col-1">Telefone</th>
-                        <th scope="col-2">E-mail</th>
-                        <th scope="col-1">Editar</th>
-                        <th scope="col-1">Excluir</th>
+                        <th>ID</th>
+                        <th>Perfil</th>
+                        <th>Nome</th>
+                        <th>CPF/Matrícula</th>
+                        <th>Graduação/Posto</th>
+                        <th>Setor/Praia</th>
+                        <th>Telefone</th>
+                        <th>E-mail</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="us : ${usuarios}">
-                        <td class="col-1 border" th:text="${us.id}">ID</td>
-                        <td class="col-1 border" th:text="${us.perfil.getDescricao()}">Perfil</td>
-                        <td class="col-2 border" th:text="${us.nome}">Nome</td>
-                        <td class="col-1 border" th:text="${us.mtcl}">mtcl</td>
-                        <td class="col-1 border" th:text="${us.graduacao}">Graduação/Posto</td>
-                        <td class="col-1 border" th:text="${us.setor.getDescricao()}">Setor/Praia</td>
-                        <td class="col-2 border" th:text="${us.telefone}">telefone</td>
-                        <td class="col-2 border" th:text="${us.email}">Email</td>
-                        <td class="col-1 border">
-                            <a href="" class="btn btn-primary btn-sm" th:attr="data-id=${us.id}" onclick="editarUsuario(this); return false;">Editar</a>
-                        </td>
-                        <td class="col-1 border"><a href="" class="btn btn-danger btn-sm" th:attr="data-id=${us.id}">
-                            Excluir
-                        </a></td>
+                        <td th:text="${us.id}">ID</td>
+                        <td th:text="${us.perfil.getDescricao()}">Perfil</td>
+                        <td th:text="${us.nome}">Nome</td>
+                        <td th:text="${us.mtcl}">mtcl</td>
+                        <td th:text="${us.graduacao}">Graduação</td>
+                        <td th:text="${us.setor.getDescricao()}">Setor</td>
+                        <td th:text="${us.telefone}">Telefone</td>
+                        <td th:text="${us.email}">Email</td>
+                        <td><a href="#" class="btn btn-primary btn-sm" th:attr="data-id=${us.id}" onclick="editarUsuario(this); return false;">Editar</a></td>
+                        <td><a href="#" class="btn btn-danger btn-sm" th:attr="data-id=${us.id}">Excluir</a></td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <nav>
+                    <th:block th:with="totalPagesSafe=${totalPages > 0 ? totalPages : 1}">
+                        <ul class="pagination">
+
+                            <!-- Botão "Anterior" -->
+                            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/user/register(page=${currentPage - 1})}">
+                                    Anterior
+                                </a>
+                            </li>
+
+                            <!-- Botões de página -->
+                            <li class="page-item"
+                                th:each="i : ${#numbers.sequence(1, totalPagesSafe)}"
+                                th:classappend="${i == currentPage} ? ' active'">
+                                <a class="page-link"
+                                   th:href="@{/user/register(page=${i})}"
+                                   th:text="${i}">1</a>
+                            </li>
+
+                            <!-- Botão "Próximo" -->
+                            <li class="page-item" th:classappend="${currentPage == totalPagesSafe} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/user/register(page=${currentPage + 1})}">
+                                    Próximo
+                                </a>
+                            </li>
+
+                        </ul>
+                    </th:block>
+                </nav>
+            </div>
                 <!-- Botões alinhados à direita -->
-            </form>
         </div>
     </div>
 </div>

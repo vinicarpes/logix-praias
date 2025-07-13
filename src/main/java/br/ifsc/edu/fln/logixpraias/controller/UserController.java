@@ -3,6 +3,9 @@ package br.ifsc.edu.fln.logixpraias.controller;
 import br.ifsc.edu.fln.logixpraias.model.Usuario;
 import br.ifsc.edu.fln.logixpraias.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,20 +22,25 @@ public class UserController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    /**
-     * Tela de cadastro e listagem de usuários
-     */
     @GetMapping("/register")
-    public ModelAndView create(Model model) {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        model.addAttribute("usuarios", usuarios);
-        model.addAttribute("usuario", new Usuario());
-        return new ModelAndView("user-register");
+    public ModelAndView getUsuarios(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page - 1, size); // page - 1 porque o PageRequest é zero-based
+        Page<Usuario> paginaUsuarios = usuarioRepository.findAll(pageable);
+
+        int totalPages = paginaUsuarios.getTotalPages();
+        if (totalPages <= 0) totalPages = 1;
+
+        ModelAndView mv = new ModelAndView("user-register");
+        mv.addObject("usuarios", paginaUsuarios.getContent());
+        mv.addObject("usuario", new Usuario());
+        mv.addObject("currentPage", page);
+        mv.addObject("totalPages", totalPages);
+        return mv;
     }
 
-    /**
-     * Cadastro de novo usuário via formulário
-     */
     @PostMapping("/register")
     public ModelAndView register(@ModelAttribute Usuario usuario) {
         try {
@@ -44,9 +52,7 @@ public class UserController {
         }
     }
 
-    /**
-     * Atualização de usuário via JSON (fetch PUT)
-     */
+
     @PutMapping("/update/{id}")
     @ResponseBody
     public ResponseEntity<String> update(@PathVariable Long id, @RequestBody Usuario usuario) {
@@ -68,9 +74,6 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    /**
-     * Deleta um usuário por ID
-     */
     @DeleteMapping("/delete/{id}")
     @ResponseBody
     public ResponseEntity<?> delete(@PathVariable Long id) {
