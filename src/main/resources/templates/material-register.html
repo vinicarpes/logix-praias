@@ -73,6 +73,41 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center mt-3">
+                    <nav>
+                        <th:block th:with="totalPagesSafe=${totalPages > 0 ? totalPages : 1}">
+                            <ul class="pagination">
+
+                                <!-- Botão "Anterior" -->
+                                <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/material/register(page=${currentPage - 1})}">
+                                        Anterior
+                                    </a>
+                                </li>
+
+                                <!-- Botões de página -->
+                                <li class="page-item"
+                                    th:each="i : ${#numbers.sequence(1, totalPagesSafe)}"
+                                    th:classappend="${i == currentPage} ? ' active'">
+                                    <a class="page-link"
+                                       th:href="@{/material/register(page=${i})}"
+                                       th:text="${i}">1</a>
+                                </li>
+
+                                <!-- Botão "Próximo" -->
+                                <li class="page-item" th:classappend="${currentPage == totalPagesSafe} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/material/register(page=${currentPage + 1})}">
+                                        Próximo
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </th:block>
+                    </nav>
+                </div>
+
 
                 <!-- Botões alinhados à direita -->
             </form>

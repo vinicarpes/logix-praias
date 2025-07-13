@@ -6,6 +6,9 @@ import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
 import br.ifsc.edu.fln.logixpraias.repository.EstoqueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +30,29 @@ public class MaterialController {
     private EstoqueRepository estoqueRepository;
 
     @GetMapping("/register")
-    public ModelAndView create(Model model) {
+    public ModelAndView get(@RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "10") int size) {
+
         List<Categoria> categorias = categoriaRepository.findAll();
-        model.addAttribute("materiais", materialRepository.findAll());
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("material",  new Material());
+
+        // Corrigindo: página começa do zero no Spring
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Material> materialPage = materialRepository.findAll(pageable);
+
+        int totalPages = materialPage.getTotalPages();
+        if (totalPages <= 0) totalPages = 1;
+
         ModelAndView mv = new ModelAndView("material-register");
+        mv.addObject("categorias", categorias);
+        mv.addObject("materiais", materialPage.getContent());
+        mv.addObject("material", new Material());
+        mv.addObject("totalPages", totalPages);
+        mv.addObject("currentPage", page);
+
         return mv;
     }
+
+
 
     @PostMapping("/register")
     public ModelAndView register(@ModelAttribute Material material) {
