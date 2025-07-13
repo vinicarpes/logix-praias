@@ -94,7 +94,7 @@
                         <th scope="col-2">Data</th>
                         <th scope="col-2">Fornecedor</th>
                         <th scope="col-1">Quantidade</th>
-                        <th scope="col-1">Descrição</th>
+                        <th scope="col-2">Descrição</th>
                         <th scope="col-1">Editar</th>
                     </tr>
                     </thead>
@@ -106,13 +106,13 @@
                         <td class="col-2 border" th:text="${rec.dataRecebimento}">Data</td>
                         <td class="col-2 border" th:text="${rec.fornecedor}">Fornecedor</td>
                         <td class="col-1 border" th:text="${rec.quantidade}">Quantidade</td>
-                        <td class="col-1 border" th:text="${rec.descricao}">Descrição</td>
+                        <td class="col-2 border" th:text="${rec.descricao}">Descrição</td>
                         <td class="col-1 border">
                             <a href="#" class="btn btn-primary btn-sm" th:attr="data-id=${rec.id}" onclick="editarRecebimento(this); return false;">Editar</a>
                         </td>
-                        <td class="col-1 border"><a href="#" class="btn btn-danger btn-sm" th:attr="data-id=${rec.id}">
-                            Excluir
-                        </a></td>
+<!--                        <td class="col-1 border"><a href="#" class="btn btn-danger btn-sm" th:attr="data-id=${rec.id}">-->
+<!--                            Excluir-->
+<!--                        </a></td>-->
                     </tr>
                     </tbody>
                 </table>
