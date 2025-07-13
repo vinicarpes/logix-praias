@@ -2,11 +2,15 @@ package br.ifsc.edu.fln.logixpraias.controller;
 
 import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import br.ifsc.edu.fln.logixpraias.model.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -17,11 +21,24 @@ public class MaterialTypeController {
     CategoriaRepository categoriaRepository;
 
     @GetMapping("/register")
-    public String home(Model model) {
-        model.addAttribute("categoria", new Categoria());
-        model.addAttribute("categorias", categoriaRepository.findAll());
-        return "material-type-register";
+    public ModelAndView home(@RequestParam(defaultValue = "1") int page,
+                             @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Categoria> categoriaPage = categoriaRepository.findAll(pageable);
+
+        int totalPages = categoriaPage.getTotalPages();
+        if (totalPages <= 0) totalPages = 1;
+
+        ModelAndView mv = new ModelAndView("material-type-register");
+        mv.addObject("categoria", new Categoria());
+        mv.addObject("categorias", categoriaPage.getContent());
+        mv.addObject("totalPages", totalPages);
+        mv.addObject("currentPage", page);
+
+        return mv;
     }
+
 
     @PostMapping("/register")
     public String save(@ModelAttribute Categoria categoria) {
