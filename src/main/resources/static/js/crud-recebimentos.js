@@ -7,6 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const id = form.getAttribute('data-edit-id');
 
+            // Só prosseguir se estiver editando (tem id)
+            if (!id) {
+                form.submit();  // permite o submit padrão seguir, que será o cadastro via backend
+                return;         // evita continuar executando o código JS de edição
+            }
+
+
             const materialField = document.getElementById('material');
             const usuarioField = document.getElementById('resp-withdrawal');
             const dataRecebimentoField = document.getElementById('receipt-date');
@@ -14,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const quantidadeField = document.getElementById('quantity');
             const descricaoField = document.getElementById('description');
 
-            // Validação de campos obrigatórios
             if (!materialField || !usuarioField || !dataRecebimentoField || !quantidadeField) {
                 alert("Erro interno: campos do formulário não encontrados.");
                 return;
@@ -27,45 +33,48 @@ document.addEventListener("DOMContentLoaded", () => {
             const quantidade = quantidadeField.value;
             const descricao = descricaoField?.value || '';
 
-            if (!id || !materialId || !usuarioId || !dataRecebimento || !quantidade) {
+            if (!materialId || !usuarioId || !dataRecebimento || !quantidade) {
                 alert("Preencha todos os campos obrigatórios.");
                 return;
             }
 
             const recebimento = {
-                id: parseInt(id),
                 quantidade: parseInt(quantidade),
                 descricao: descricao,
                 fornecedor: fornecedor,
-                dataRecebimento: dataRecebimento + "T00:00:00", // ISO padrão para LocalDateTime
+                dataRecebimento: dataRecebimento + "T00:00:00",
                 material: { id: parseInt(materialId) },
                 usuario: { id: parseInt(usuarioId) }
             };
 
+            // Só edição via PUT
             fetch(`/material/receipt/update/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(recebimento)
             })
                 .then(response => {
                     if (response.ok) {
                         alert("Recebimento atualizado com sucesso!");
+                        form.removeAttribute('data-edit-id');
+                        form.reset();
                         location.reload();
-                    } else if (response.status === 404) {
-                        alert("Recebimento não encontrado.");
                     } else {
                         return response.text().then(text => {
-                            throw new Error(text || "Erro ao atualizar o recebimento.");
+                            throw new Error(text || "Erro ao processar o recebimento.");
                         });
                     }
                 })
                 .catch(err => {
                     console.error("Erro:", err);
-                    alert("Erro inesperado ao atualizar o recebimento.");
+                    alert("Erro inesperado ao processar o recebimento.");
                 });
         });
     }
 });
+
 // Função chamada ao clicar no botão "Editar"
 function editarRecebimento(botao) {
     const id = botao.getAttribute('data-id');
@@ -89,9 +98,8 @@ function editarRecebimento(botao) {
                 return;
             }
 
-            // Apenas define a categoria se ela vier preenchida
             const categoriaSelect = document.getElementById('material-type');
-            if (categoriaSelect && recebimento.material && recebimento.material.categoria) {
+            if (categoriaSelect && recebimento.material?.categoria) {
                 categoriaSelect.value = recebimento.material.categoria.id;
             }
 
@@ -101,7 +109,6 @@ function editarRecebimento(botao) {
             fornecedorInput.value = recebimento.fornecedor || '';
             descricaoTextarea.value = recebimento.descricao || '';
 
-            // Converte LocalDateTime em yyyy-MM-dd
             if (recebimento.dataRecebimento) {
                 const data = new Date(recebimento.dataRecebimento);
                 dataRecebimentoInput.value = data.toISOString().split("T")[0];

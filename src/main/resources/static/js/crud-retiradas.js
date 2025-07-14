@@ -3,9 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (form) {
         form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
             const id = form.getAttribute('data-edit-id');
+
+            if (!id) {
+                // Se não estiver em modo de edição, envia normalmente para o backend
+                return; // deixa o comportamento padrão seguir
+            }
+
+            event.preventDefault(); // só impede o submit se for edição
 
             const materialField = document.getElementById('material');
             const usuarioField = document.getElementById('resp-withdrawal');
@@ -17,17 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            console.log('material:', materialField.value);
-            console.log('usuario:', usuarioField.value);
-            console.log('quantidade:', quantidadeField.value);
-            console.log('observacao:', observacaoField.value);
-
             const materialId = materialField.value;
             const usuarioId = usuarioField.value;
             const quantidade = quantidadeField.value;
             const observacao = observacaoField.value;
 
-            if (!id || !materialId || !usuarioId || !quantidade) {
+            if (!materialId || !usuarioId || !quantidade) {
                 alert("Preencha todos os campos obrigatórios.");
                 return;
             }
@@ -48,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => {
                     if (response.ok) {
                         alert("Retirada atualizada com sucesso!");
+                        // Limpa o form e remove o atributo de edição
+                        form.reset();
+                        form.removeAttribute('data-edit-id');
                         location.reload();
                     } else if (response.status === 404) {
                         alert("Retirada não encontrada.");
@@ -75,7 +78,6 @@ function editarRetirada(botao) {
             return response.json();
         })
         .then(retirada => {
-            // Busca os elementos do formulário
             const categoriaSelect = document.getElementById('material-type');
             const materialSelect = document.getElementById('material');
             const usuarioSelect = document.getElementById('resp-withdrawal');
@@ -83,20 +85,18 @@ function editarRetirada(botao) {
             const observacaoTextarea = document.getElementById('observation');
             const form = document.getElementById('form-retirada');
 
-            // Verifica se todos os elementos estão presentes
             if (!categoriaSelect || !materialSelect || !usuarioSelect || !quantidadeInput || !observacaoTextarea || !form) {
                 alert("Erro interno: campo do formulário não encontrado.");
                 return;
             }
 
-            // Preenche os valores com os dados da retirada
             categoriaSelect.value = retirada.material.categoria.id;
             materialSelect.value = retirada.material.id;
             usuarioSelect.value = retirada.usuario.id;
             quantidadeInput.value = retirada.quantidade;
             observacaoTextarea.value = retirada.observacao || '';
 
-            // Marca o formulário como modo edição
+            // Ativa modo de edição
             form.setAttribute('data-edit-id', retirada.id);
         })
         .catch(error => {

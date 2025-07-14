@@ -68,6 +68,7 @@ public class MaterialReceiptController {
     public ModelAndView register(@ModelAttribute RecebimentoMaterial recebimento){
         try{
             recebimentoService.save(recebimento);
+            emailService.sendEmail(emailService.toEmail(recebimento));
             return new ModelAndView("redirect:/material/receipt");
         }catch(Exception e){
             e.printStackTrace();

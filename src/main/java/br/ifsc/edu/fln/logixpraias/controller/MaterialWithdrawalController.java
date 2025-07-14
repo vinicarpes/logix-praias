@@ -5,6 +5,7 @@ import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialWithdrawalRepository;
 import br.ifsc.edu.fln.logixpraias.repository.UsuarioRepository;
+import br.ifsc.edu.fln.logixpraias.services.EmailService;
 import br.ifsc.edu.fln.logixpraias.services.RecebimentoService;
 import br.ifsc.edu.fln.logixpraias.services.RetiradaService;
 import org.springframework.beans.BeanUtils;
@@ -35,6 +36,8 @@ public class MaterialWithdrawalController {
     UsuarioRepository usuarioRepository;
     @Autowired
     MaterialWithdrawalRepository retiradaRepository;
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("")
     public ModelAndView home(@RequestParam(defaultValue = "1") int page,
@@ -67,6 +70,7 @@ public class MaterialWithdrawalController {
     public ModelAndView register(@ModelAttribute RetiradaMaterial retirada){
         try{
             retiradaService.save(retirada);
+            emailService.sendEmail(emailService.toEmail(retirada));
             return new ModelAndView("redirect:/material/withdrawal");
         }catch(Exception e){
             e.printStackTrace();
