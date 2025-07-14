@@ -5,6 +5,7 @@ import br.ifsc.edu.fln.logixpraias.repository.CategoriaRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialReceiptRepository;
 import br.ifsc.edu.fln.logixpraias.repository.MaterialRepository;
 import br.ifsc.edu.fln.logixpraias.repository.UsuarioRepository;
+import br.ifsc.edu.fln.logixpraias.services.EmailService;
 import br.ifsc.edu.fln.logixpraias.services.EstoqueService;
 import br.ifsc.edu.fln.logixpraias.services.RecebimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import java.util.Optional;
 @RequestMapping("/material/receipt")
 public class MaterialReceiptController {
 
+    @Autowired
+    EmailService emailService;
     @Autowired
     CategoriaRepository categoriaRepository;
     @Autowired
