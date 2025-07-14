@@ -46,7 +46,7 @@ public class EmailService {
 
         return new Email(
                 retirada.getUsuario().getEmail(),
-                "Confirmação de Retirada de Material- " + retirada.getMaterial().getNome(),
+                "Confirmação de Retirada de Material - " + retirada.getMaterial().getNome(),
                 corpo
         );
     }
