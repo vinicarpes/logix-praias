@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: indexHead('Logix Praias')}"></head>
+<body>
+
+<div th:replace="~{fragments :: navbar(' Logix Praias')}"></div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2><i class="fa fa-file-text"></i> Relatórios Personalizados</h2>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">Registro de recebimento no estoque (total)</li>
+                        <li class="list-group-item">Registro de retirada de material para uso (total)</li>
+                        <li class="list-group-item">Estoque por material</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 d-flex flex-column gap-2">
+                    <button class="btn btn-primary" onclick="gerarRelatorio('receipts')">Gerar Relatório</button>
+                    <button class="btn btn-primary" onclick="gerarRelatorio('withdrawals')">Gerar Relatório</button>
+                    <button class="btn btn-primary" onclick="gerarRelatorio('storage')">Gerar Relatório</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="option">
+        <a href="/index" class="option">
+            <i class="fa-home fa-solid"></i>
+            Início
+        </a>
+    </div>
+    <div class="option">
+        <a href="/index/about" class="option">
+            <i class="fa fa-info-circle"></i>
+            Sobre
+        </a>
+    </div>
+
+    <div class="option">
+        <a href="/index" class="option">
+            <i class="fa fa-user"></i>
+            Minha Conta
+        </a>
+    </div>
+</footer>
+<!-- Offcanvas Menu -->
+<div th:replace="~{fragments :: menu}"></div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+<script src="/js/gerar-relatorio.js"></script>
+</body>
+</html>
