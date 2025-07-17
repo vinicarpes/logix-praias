@@ -33,7 +33,7 @@ public class StorageController {
             @RequestParam(required = false) Long categoria,
             @RequestParam(required = false) Integer quantity,
             @RequestParam(name = "quantity-param", required = false) String op,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "0 ") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Specification<Estoque> spec = Specification.where(null);
