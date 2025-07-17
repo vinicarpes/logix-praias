@@ -55,3 +55,33 @@ Você pode acessar o código-fonte e a documentação completa no GitHub:
 
 👉 [https://github.com/vinicarpes/logix-praias](https://github.com/vinicarpes/logix-praias)
 
+---
+
+## Como Rodar o Projeto ▶️
+
+Para executar o projeto localmente:
+
+1. **Configure as variáveis de ambiente ou adicione ao `application.properties`:**
+
+        spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/logixpraias
+        spring.datasource.username=
+        spring.datasource.password=
+        
+        server.port=8081
+        
+        spring.mail.username=
+        spring.mail.password=
+        spring.mail.port=
+        spring.mail.host=sandbox.smtp.mailtrap.io
+   
+🔒 Importante: Para ambientes públicos, lembre-se de utilizar variáveis de ambiente ou um arquivo .env para proteger suas credenciais.
+
+Crie o banco de dados MySQL com o nome logixpraias.
+
+Execute o script SQL disponível na pasta:
+
+    src/main/resources/db/
+
+Esse script criará as tabelas e dados necessários para inicialização da aplicação.
+
+Pronto! Está tudo pronto para rodar :)
