@@ -5,22 +5,27 @@
 
 <div th:replace="~{fragments :: navbar(' Logix Praias')}"></div>
 
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-8">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
             <h2><i class="fa fa-file-text"></i> Relatórios Personalizados</h2>
-            <div class="row mt-3">
-                <div class="col-md-6">
+
+            <div class="row mt-4 justify-content-center">
+                <div class="col-md-5">
                     <ul class="list-group">
                         <li class="list-group-item">Registro de recebimento no estoque (total)</li>
                         <li class="list-group-item">Registro de retirada de material para uso (total)</li>
-                        <li class="list-group-item">Estoque por material</li>
+                        <li class="list-group-item">Estoque de materiais</li>
+                        <li class="list-group-item">Movimentação recente (30 dias)</li>
+                        <li class="list-group-item">Total de retiradas/recebimento(ou devolução) por responsável</li>
                     </ul>
                 </div>
-                <div class="col-md-6 d-flex flex-column gap-2">
+                <div class="col-md-5 d-flex flex-column gap-2 mt-2">
                     <button class="btn btn-primary" onclick="gerarRelatorio('receipts')">Gerar Relatório</button>
                     <button class="btn btn-primary" onclick="gerarRelatorio('withdrawals')">Gerar Relatório</button>
                     <button class="btn btn-primary" onclick="gerarRelatorio('storage')">Gerar Relatório</button>
+                    <button class="btn btn-primary" onclick="gerarRelatorio('recent-transactions')">Gerar Relatório</button>
+                    <button class="btn btn-primary" onclick="gerarRelatorio('transaction-by-user')">Gerar Relatório</button>
                 </div>
             </div>
         </div>

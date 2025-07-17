@@ -11,32 +11,34 @@
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
 		</conditionalStyle>
 	</style>
-	<query language="SQL"><![CDATA[SELECT 
-    cat.nome AS 'Categoria',
-    mat.nome AS 'Material', 
-    quantidade AS 'Quantidade'
-FROM 
-    estoque
-JOIN 
-    material mat ON material_id = mat.id
-JOIN 
-    categoria cat ON mat.categoria_id = cat.id
-ORDER BY 
-    cat.nome, mat.nome ASC;]]></query>
-	<field name="Categoria" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="data_retirada"/>
-		<property name="com.jaspersoft.studio.field.label" value="Retirado em"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="retirada_material"/>
+	<query language="SQL"><![CDATA[SELECT 'Entrada' AS Tipo, m.nome, rm.quantidade, rm.data_recebimento AS data
+FROM recebimento_material rm
+JOIN material m ON rm.material_id = m.id
+WHERE rm.data_recebimento >= CURDATE() - INTERVAL 30 DAY
+
+UNION ALL
+
+SELECT 'Saída', m.nome, r.quantidade, r.data_retirada
+FROM retirada_material r
+JOIN material m ON r.material_id = m.id
+WHERE r.data_retirada >= CURDATE() - INTERVAL 30 DAY
+
+ORDER BY data ASC;]]></query>
+	<field name="Tipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="Tipo"/>
 	</field>
-	<field name="Quantidade" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="quantidade"/>
-		<property name="com.jaspersoft.studio.field.label" value="Quantidade"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="retirada_material"/>
-	</field>
-	<field name="Material" class="java.lang.String">
+	<field name="nome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nome"/>
-		<property name="com.jaspersoft.studio.field.label" value="Material"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="material"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
+	<field name="quantidade" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="quantidade"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantidade"/>
+	</field>
+	<field name="data" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="data"/>
+		<property name="com.jaspersoft.studio.field.label" value="data"/>
 	</field>
 	<background splitType="Stretch"/>
 	<title height="132" splitType="Stretch">
@@ -44,49 +46,57 @@ ORDER BY
 			<element kind="staticText" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21" x="140" y="0" width="321" height="66" forecolor="#030000" bold="false" style="Title">
 				<text><![CDATA[Logix Praias]]></text>
 			</element>
-			<element kind="staticText" uuid="8978eac3-c578-41c9-837e-48d2b0184642" x="180" y="80" width="243" height="29" forecolor="#030000" fontSize="22.0" bold="false" style="SubTitle">
-				<text><![CDATA[Materiais em estoque]]></text>
+			<element kind="staticText" uuid="8978eac3-c578-41c9-837e-48d2b0184642" x="180" y="80" width="350" height="29" forecolor="#030000" fontSize="22.0" bold="false" style="SubTitle">
+				<text><![CDATA[Movimentação Mensal]]></text>
 			</element>
 		</element>
 	</title>
 	<pageHeader splitType="Stretch"/>
-	<columnHeader height="34" splitType="Stretch">
-		<element kind="staticText" uuid="d03fbb32-98cc-41c9-8f47-11a6f9b1af66" x="2" y="7" width="210" height="18" forecolor="#000000" bold="false" style="Column header">
-			<text><![CDATA[Categoria]]></text>
+	<columnHeader height="32" splitType="Stretch">
+		<element kind="staticText" uuid="d03fbb32-98cc-41c9-8f47-11a6f9b1af66" x="0" y="7" width="138" height="18" forecolor="#000000" bold="false" style="Column header">
+			<text><![CDATA[Tipo]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5128f579-408a-4ac0-9f5a-cbd5fabf642d"/>
 		</element>
-		<element kind="staticText" uuid="9a2f6f06-a480-488e-a67b-caa148228db3" x="212" y="7" width="204" height="18" forecolor="#000000" bold="false" style="Column header">
+		<element kind="staticText" uuid="9a2f6f06-a480-488e-a67b-caa148228db3" x="138" y="7" width="138" height="18" forecolor="#000000" bold="false" style="Column header">
 			<text><![CDATA[Material]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87b4c3ec-ca0d-41c9-8126-d61395c9dd3e"/>
 		</element>
-		<element kind="staticText" uuid="e80af00a-079c-4a9b-8c21-fea5675eb5a0" x="417" y="7" width="138" height="18" forecolor="#000000" bold="false" style="Column header">
-			<text><![CDATA[Quantidade Disp]]></text>
+		<element kind="staticText" uuid="e80af00a-079c-4a9b-8c21-fea5675eb5a0" x="276" y="7" width="138" height="18" forecolor="#000000" bold="false" style="Column header">
+			<text><![CDATA[Quantidade]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="13578e79-9950-4af7-b0c2-c064194f59c2"/>
 		</element>
-		<element kind="line" uuid="b95f4963-8d74-4dcb-b444-4a685ba607af" positionType="FixRelativeToBottom" x="2" y="30" width="555" height="1">
+		<element kind="staticText" uuid="4b5347f0-ca9b-4ada-a880-c0ca4cc71dd6" x="414" y="7" width="138" height="18" forecolor="#000000" bold="false" style="Column header">
+			<text><![CDATA[Data Operação]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d5149989-55cd-49d8-beba-493df5977a52"/>
+		</element>
+		<element kind="line" uuid="280cb7e2-ce68-4819-b7b8-7c912ebaf082" positionType="FixRelativeToBottom" x="2" y="30" width="555" height="1">
 			<pen lineWidth="0.5" lineColor="#999999"/>
 		</element>
 	</columnHeader>
 	<detail>
 		<band height="18" splitType="Stretch">
 			<element kind="frame" uuid="b50221b5-8254-440b-8c6f-1f0b138c9259" mode="Opaque" x="0" y="0" width="555" height="18" style="Row">
-				<element kind="textField" uuid="52a5b446-fa6a-40c1-ba5c-331ffa415ea3" positionType="Float" x="2" y="0" width="210" height="18" fontSize="14.0" textAdjust="StretchHeight" style="Detail">
-					<expression><![CDATA[$F{Categoria}]]></expression>
+				<element kind="textField" uuid="52a5b446-fa6a-40c1-ba5c-331ffa415ea3" positionType="Float" x="0" y="0" width="138" height="18" fontSize="14.0" textAdjust="StretchHeight" style="Detail">
+					<expression><![CDATA[$F{Tipo}]]></expression>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5128f579-408a-4ac0-9f5a-cbd5fabf642d"/>
 				</element>
-				<element kind="textField" uuid="bade1592-ea30-4725-ae55-33cab7c525b3" positionType="Float" x="212" y="0" width="204" height="18" fontSize="14.0" textAdjust="StretchHeight" style="Detail">
-					<expression><![CDATA[$F{Material}]]></expression>
+				<element kind="textField" uuid="bade1592-ea30-4725-ae55-33cab7c525b3" positionType="Float" x="138" y="0" width="138" height="18" fontSize="14.0" textAdjust="StretchHeight" style="Detail">
+					<expression><![CDATA[$F{nome}]]></expression>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87b4c3ec-ca0d-41c9-8126-d61395c9dd3e"/>
 				</element>
-				<element kind="textField" uuid="091a9442-38bd-43e5-bc7d-725a5c8c6f56" positionType="Float" x="417" y="0" width="138" height="18" fontSize="14.0" textAdjust="StretchHeight" style="Detail">
-					<expression><![CDATA[$F{Quantidade}]]></expression>
+				<element kind="textField" uuid="091a9442-38bd-43e5-bc7d-725a5c8c6f56" positionType="Float" x="276" y="0" width="138" height="18" fontSize="14.0" textAdjust="StretchHeight" style="Detail">
+					<expression><![CDATA[$F{quantidade}]]></expression>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="13578e79-9950-4af7-b0c2-c064194f59c2"/>
+				</element>
+				<element kind="textField" uuid="90ee44c0-d8fa-4af8-851c-89ee7c2f6ca4" positionType="Float" x="414" y="0" width="138" height="18" fontSize="14.0" textAdjust="StretchHeight" style="Detail">
+					<expression><![CDATA[$F{data}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d5149989-55cd-49d8-beba-493df5977a52"/>
 				</element>
 			</element>
 		</band>
 	</detail>
-	<columnFooter height="9" splitType="Stretch">
-		<element kind="line" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+	<columnFooter height="17" splitType="Stretch">
+		<element kind="line" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1" positionType="FixRelativeToBottom" x="0" y="10" width="555" height="1">
 			<pen lineWidth="0.5" lineColor="#999999"/>
 		</element>
 	</columnFooter>

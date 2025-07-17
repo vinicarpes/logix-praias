@@ -57,7 +57,7 @@ WHERE
 		</element>
 	</title>
 	<pageHeader splitType="Stretch"/>
-	<columnHeader height="26" splitType="Stretch">
+	<columnHeader height="34" splitType="Stretch">
 		<element kind="staticText" uuid="d03fbb32-98cc-41c9-8f47-11a6f9b1af66" x="0" y="7" width="138" height="18" forecolor="#000000" bold="false" style="Column header">
 			<text><![CDATA[Material]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5128f579-408a-4ac0-9f5a-cbd5fabf642d"/>
@@ -73,6 +73,9 @@ WHERE
 		<element kind="staticText" uuid="4b5347f0-ca9b-4ada-a880-c0ca4cc71dd6" x="414" y="7" width="138" height="18" forecolor="#000000" bold="false" style="Column header">
 			<text><![CDATA[Responsável]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d5149989-55cd-49d8-beba-493df5977a52"/>
+		</element>
+		<element kind="line" uuid="5d93314a-29fa-4be5-b281-e7b425e00fc8" positionType="FixRelativeToBottom" x="2" y="33" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
 		</element>
 	</columnHeader>
 	<detail>
@@ -97,7 +100,7 @@ WHERE
 			</element>
 		</band>
 	</detail>
-	<columnFooter height="7" splitType="Stretch">
+	<columnFooter height="9" splitType="Stretch">
 		<element kind="line" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
 			<pen lineWidth="0.5" lineColor="#999999"/>
 		</element>

@@ -92,7 +92,52 @@ public class ReportController {
 
         // 5. Define tipo e cabeçalhos da resposta
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "inline; filename=relatorio_retiradas.pdf");
+        response.setHeader("Content-Disposition", "inline; filename=relatorio_estoque.pdf");
+
+        // 6. Exporta o relatório diretamente na resposta HTTP
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+
+        // 7. Fecha conexão
+        conn.close();
+    }
+
+    @GetMapping("/recent-transactions")
+    public void gerarRelatorioMovimentacaoMes(HttpServletResponse response) throws JRException, IOException, SQLException {
+        // 1. Carrega o arquivo .jasper
+        URL url = getClass().getResource("/reports/movimentacao_mensal.jasper");
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+
+        // 2. Cria conexão com o banco de dados
+        Connection conn = dataSource.getConnection();
+
+        // 4. Preenche o relatório
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+
+        // 5. Define tipo e cabeçalhos da resposta
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=movimentacao_30_dias.pdf");
+
+        // 6. Exporta o relatório diretamente na resposta HTTP
+        JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+
+        // 7. Fecha conexão
+        conn.close();
+    }
+    @GetMapping("/transaction-by-user")
+    public void gerarRelatorioMovimentacaoUsuario(HttpServletResponse response) throws JRException, IOException, SQLException {
+        // 1. Carrega o arquivo .jasper
+        URL url = getClass().getResource("/reports/movimentacao_usuario.jasper");
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+
+        // 2. Cria conexão com o banco de dados
+        Connection conn = dataSource.getConnection();
+
+        // 4. Preenche o relatório
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+
+        // 5. Define tipo e cabeçalhos da resposta
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=movimentacao_total_usuarios.pdf");
 
         // 6. Exporta o relatório diretamente na resposta HTTP
         JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
